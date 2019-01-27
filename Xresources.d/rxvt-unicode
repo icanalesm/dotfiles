@@ -1,0 +1,20 @@
+! urxvt
+
+URxvt*depth:                   32
+URxvt*buffered:                true
+URxvt*underlineColor:          yellow
+URxvt*font:                    xft:monospace:style=Regular:size=10
+URxvt*fontBold:                xft:monospace:style=Bold:size=10
+URxvt*loginShell:              false
+URxvt*scrollBar:               false
+URxvt*saveLines:               2000
+!URxvt*borderLess:              true
+URxvt*cursorBlink:             false
+URxvt*secondaryScreen:         true
+URxvt*secondaryScroll:         true
+
+URxvt.perl-ext:
+URxvt.perl-ext-common:
+!URxvt.perl-ext-common:         default,matcher
+!URxvt.url-launcher:            firefox
+!URxvt.matcher.button:          1

@@ -1,0 +1,2 @@
+#include ".Xresources.d/xft"
+#include ".Xresources.d/rxvt-unicode"
