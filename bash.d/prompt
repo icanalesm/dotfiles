@@ -44,12 +44,12 @@ else
 fi;
 
 ## Set the terminal prompt
-PS1="\[${userStyle}\]\u"             # username
+PS1="\[${userStyle}\]\u\[${reset}\]"   # username
 PS1+="\[${gray}\]@"
-PS1+="\[${hostStyle}\]\h"            # host
+PS1+="\[${hostStyle}\]\h\[${reset}\]"  # host
 PS1+="\[${gray}\]:"
-PS1+="\[${green}\]\W"                # working directory
-PS1+="\[${reset}\] \$(exitstatus) "  # status of last executed command
+PS1+="\[${green}\]\W"                  # working directory
+PS1+="\[${reset}\] \$(exitstatus) "    # status of last executed command
 export PS1
 
 unset bold
