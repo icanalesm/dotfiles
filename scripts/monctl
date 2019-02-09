@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Get primary and all other connected screens
+screens=$(xrandr -q | grep " connected ")
+primscr=$(echo "${screens}" | grep "primary" | awk '{print $1}')
+screens=$(echo "${screens}" | grep -v ${primscr} | awk '{print $1}')
+
+# Get new screen
+numscrs=$(echo "${screens}" | wc -l)
+case ${numscrs} in
+0)
+	# No external monitors connected
+	exit
+	;;
+1)
+	# Only one external monitor connected
+	newscr=${screens}
+	;;
+*)
+	# Choose one of the external monitors connected
+	newscr=$(echo "${screens}" | dmenu -i -p "Select monitor:")
+	[ -z $(echo "${screens}" | grep ${newscr}) ] && exit
+	;;
+esac
+
+pos=$(echo -e "left\nright" | dmenu -i -p "What side of ${primscr} should ${newscr} be on?")
+case ${pos} in
+left | right)
+	xrandr --output "${primscr}" --auto --output "${newscr}" --"${pos}"-of "${primscr}" --auto
+	;;
+*)
+	;;
+esac
