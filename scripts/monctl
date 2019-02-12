@@ -1,69 +1,90 @@
 #!/bin/sh
 
-# Get all connected screens
-aux=$(xrandr)
-conn=$(echo "${aux}" | grep " connected ")
-nscr=$(echo "${conn}" | wc -l)
+dmenu_sel_chk()
+{
+	_SEL=$(echo -e "$1" | dmenu -i -p "$2")
+	if [ -z "$_SEL" ] || [ ! $(echo "$1" | grep "$_SEL") ]; then
+		exit 1
+	fi
+}
 
-if [ ${nscr} -eq 0 ]; then
-	exit
-fi
+mon_sel_res()
+{
+	_AUX=$(echo "$_XRANDR_DATA" | sed -e "1,/$1/ d" -e "/connected/,$ d" | awk '{print $1}')
+	dmenu_sel_chk "$_AUX" "Select resolution for $1:"
+}
 
-action=$(echo -e "Connect external monitor\nChange resolution" | dmenu -i -p "Select action:")
-case ${action} in
+mon_get_posrelto()
+{
+	_X1=$(echo "$_XRANDR_DATA" | grep $1 | awk '{if ($3 != "primary") print $3; else print $4}' | awk -F '+' '{print $2}')
+	_X2=$(echo "$_XRANDR_DATA" | grep $2 | awk '{if ($3 != "primary") print $3; else print $4}' | awk -F '+' '{print $2}')
+	if [ "$_X1" -lt "$_X2" ]; then
+		echo "left-of"
+	elif [ "$_X1" -gt "$_X2" ]; then
+		echo "right-of"
+	else
+		echo "same-as"
+	fi
+}
 
-"Connect external monitor")
+# Get data of connected monitors from xrandr
+_XRANDR_DATA=$(xrandr | sed -e "/disconnected/,$ d")
+# Get connected monitors
+MON_CONN=$(echo "$_XRANDR_DATA" | grep "connected" | awk '{print $1}')
+# Get number of connected monitors
+MON_N=$(echo "$MON_CONN" | wc -l)
 
-	prim=$(echo "${conn}" | grep "primary" | awk '{print $1}')
-	conn=$(echo "${conn}" | grep -v ${prim} | awk '{print $1}')
-	# Get new screen
-	case ${nscr} in
-	1)
-		exit
-		;;
-	2)
-		new=${conn}
-		;;
-	*)
-		new=$(echo "${conn}" | dmenu -i -p "Select monitor:")
-		[ -z ${new} ] && exit
-		[ -z $(echo "${conn}" | grep ${new}) ] && exit
-		;;
-	esac
-	# Set position
-	pos=$(echo -e "left\nright" | dmenu -i -p "Should ${new} be placed left or right of ${prim}?")
-	case ${pos} in
-	left | right)
-		xrandr --output "${prim}" --auto --output "${new}" --"${pos}"-of "${prim}" --auto
-		;;
-	*)
-		;;
-	esac
+# Select action to perform
+case $MON_N in
+1)
+	action="Change resolution" ;;
+2)
+	action=$(echo -e "Extend monitor\nChange resolution" | dmenu -i -p "Select action:") ;;
+*)
+	exit 1 ;;
+esac
+
+case $action in
+
+"Extend monitor")
+
+	# Select primary monitor
+	dmenu_sel_chk "$MON_CONN" "Select primary monitor:"
+	MON_PRIM=$_SEL
+	# Select second monitor and its position with respect to primary
+	# (it is assumed that only 2 monitors are connected)
+	MON_EXTD=$(echo "$MON_CONN" | grep -v "$MON_PRIM")
+	dmenu_sel_chk "left\nright" "Position of $MON_EXTD relative to primary ($MON_PRIM):"
+	MON_EXTD_POS=$_SEL
+	# Extend monitor
+	xrandr --output "$MON_PRIM" --primary --output "$MON_EXTD" --"$MON_EXTD_POS"-of "$MON_PRIM"
 	;;
 
 "Change resolution")
 
-	conn=$(echo "${conn}" | awk '{print $1}')
-	# Get screen
-	case ${nscr} in
-	1)
-		scr=${conn}
-		;;
-	*)
-		scr=$(echo "${conn}" | dmenu -i -p "Select monitor:")
-		[ -z ${scr} ] && exit
-		[ -z $(echo "${conn}" | grep ${scr}) ] && exit
-		;;
-	esac
-	# Select and set resolution
-	aux=$(echo "${aux}" | sed -e "1,/${scr}/ d" -e "/connected/,$ d" | awk '{print $1}')
-	res=$(echo "${aux}" | dmenu -i -p "Select resolution for ${scr}:")
-	[ -z ${res} ] && exit
-	[ -z $(echo "${aux}" | grep ${res}) ] && exit
-	xrandr --output "${scr}" --mode "${res}"
+	if [ "$MON_N" -eq 1 ]; then
+		# Select resolution
+		mon_sel_res "$MON_CONN"
+		# Set resolution
+		xrandr --output "$MON_CONN" --primary --mode "$_SEL"
+	else
+		# Select monitor
+		dmenu_sel_chk "$MON_CONN" "Select monitor:"
+		MON_TGT=$_SEL
+		# Select resolution
+		mon_sel_res "$MON_TGT"
+		MON_TGT_RES=$_SEL
+		# Get second monitor and its position with respect to the selected one
+		# (it is assumed that only 2 monitors are connected)
+		MON_EXTD=$(echo "$MON_CONN" | grep -v "$MON_TGT")
+		MON_EXTD_POS=$(mon_get_posrelto "$MON_EXTD" "$MON_TGT")
+		# Set resolution
+		xrandr --output "$MON_TGT" --mode "$MON_TGT_RES" --output "$MON_EXTD" --"$MON_EXTD_POS" "$MON_TGT"
+	fi
 	;;
 
 *)
+	exit 1
 	;;
 
 esac
