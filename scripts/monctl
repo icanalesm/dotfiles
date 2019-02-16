@@ -1,5 +1,14 @@
 #!/bin/sh
 
+# Get data of connected monitors from xrandr
+_XRANDR_DATA=$(xrandr | sed -e "/disconnected/,$ d")
+# Get connected monitors and their data
+_MON_CONN_DATA=$(echo "$_XRANDR_DATA" | grep "connected")
+# Get connected monitors
+_MON_CONN=$(echo "$_MON_CONN_DATA" | awk '{print $1}')
+# Get number of connected monitors
+_MON_N=$(echo "$_MON_CONN" | wc -l)
+
 dmenu_sel_chk()
 {
 	_SEL=$(echo -e "$1" | dmenu -i -p "$2")
@@ -8,83 +17,83 @@ dmenu_sel_chk()
 	fi
 }
 
-mon_sel_res()
+mon_get_curres()
 {
-	_AUX=$(echo "$_XRANDR_DATA" | sed -e "1,/$1/ d" -e "/connected/,$ d" | awk '{print $1}')
-	dmenu_sel_chk "$_AUX" "Select resolution for $1:"
+	echo "$(echo "$_XRANDR_DATA" | sed -e "1,/$1/ d" -e "/connected/,$ d" | grep "*" | awk '{print $1}')"
 }
 
-mon_get_posrelto()
+mon_get_prefres()
 {
-	_X1=$(echo "$_XRANDR_DATA" | grep $1 | awk '{if ($3 != "primary") print $3; else print $4}' | awk -F '+' '{print $2}')
-	_X2=$(echo "$_XRANDR_DATA" | grep $2 | awk '{if ($3 != "primary") print $3; else print $4}' | awk -F '+' '{print $2}')
-	if [ "$_X1" -lt "$_X2" ]; then
-		echo "left-of"
-	elif [ "$_X1" -gt "$_X2" ]; then
-		echo "right-of"
-	else
-		echo "same-as"
-	fi
+	echo "$(echo "$_XRANDR_DATA" | sed -e "1,/$1/ d" -e "/connected/,$ d" | grep "+" | awk '{print $1}')"
 }
 
-# Get data of connected monitors from xrandr
-_XRANDR_DATA=$(xrandr | sed -e "/disconnected/,$ d")
-# Get connected monitors
-MON_CONN=$(echo "$_XRANDR_DATA" | grep "connected" | awk '{print $1}')
-# Get number of connected monitors
-MON_N=$(echo "$MON_CONN" | wc -l)
-
-# Select action to perform
-case $MON_N in
-1)
-	action="Change resolution" ;;
-2)
-	action=$(echo -e "Extend monitor\nChange resolution" | dmenu -i -p "Select action:") ;;
-*)
-	exit 1 ;;
-esac
-
-case $action in
-
-"Extend monitor")
-
+extend()
+{
 	# Select primary monitor
-	dmenu_sel_chk "$MON_CONN" "Select primary monitor:"
-	MON_PRIM=$_SEL
-	# Select second monitor and its position with respect to primary
-	# (it is assumed that only 2 monitors are connected)
-	MON_EXTD=$(echo "$MON_CONN" | grep -v "$MON_PRIM")
-	dmenu_sel_chk "left\nright" "Position of $MON_EXTD relative to primary ($MON_PRIM):"
-	MON_EXTD_POS=$_SEL
-	# Extend monitor
-	xrandr --output "$MON_PRIM" --primary --output "$MON_EXTD" --"$MON_EXTD_POS"-of "$MON_PRIM"
-	;;
-
-"Change resolution")
-
-	if [ "$MON_N" -eq 1 ]; then
-		# Select resolution
-		mon_sel_res "$MON_CONN"
-		# Set resolution
-		xrandr --output "$MON_CONN" --primary --mode "$_SEL"
+	dmenu_sel_chk "$_MON_CONN" "Select primary monitor:"
+	mon_pri=$_SEL
+	# Get second monitor and select its position respect to primary monitor
+	mon_sec=$(echo "$_MON_CONN" | grep -v "$mon_pri")
+	dmenu_sel_chk "left\nright\nabove\nbelow" "Position of $mon_sec relative to $mon_pri:"
+	if [ "$_SEL" = "left" ] || [ "$_SEL" = "right" ]; then
+		mon_sec_pos=$_SEL"-of"
 	else
-		# Select monitor
-		dmenu_sel_chk "$MON_CONN" "Select monitor:"
-		MON_TGT=$_SEL
-		# Select resolution
-		mon_sel_res "$MON_TGT"
-		MON_TGT_RES=$_SEL
-		# Get second monitor and its position with respect to the selected one
-		# (it is assumed that only 2 monitors are connected)
-		MON_EXTD=$(echo "$MON_CONN" | grep -v "$MON_TGT")
-		MON_EXTD_POS=$(mon_get_posrelto "$MON_EXTD" "$MON_TGT")
-		# Set resolution
-		xrandr --output "$MON_TGT" --mode "$MON_TGT_RES" --output "$MON_EXTD" --"$MON_EXTD_POS" "$MON_TGT"
+		mon_sec_pos=$_SEL
 	fi
-	;;
+	# Get current resolution of monitors, or the preferred ones if the
+	# monitors are not enabled
+	mon_pri_res=$(mon_get_curres "$mon_pri")
+	if [ -z "$mon_pri_res" ]; then
+		mon_pri_res=$(mon_get_prefres "$mon_pri")
+	fi
+	mon_sec_res=$(mon_get_curres "$mon_sec")
+	if [ -z "$mon_sec_res" ]; then
+		mon_sec_res=$(mon_get_prefres "$mon_sec")
+	fi
+	# Extend monitor
+	xrandr --output "$mon_pri" --primary --mode "$mon_pri_res" --scale 1.0x1.0\
+               --output "$mon_sec" --mode "$mon_sec_res" --scale 1.0x1.0 --"$mon_sec_pos" "$mon_pri"
+}
 
+mirror()
+{
+	# Select primary monitor
+	dmenu_sel_chk "$_MON_CONN" "Select main monitor:"
+	mon_pri=$_SEL
+	# Get second monitor
+	mon_sec=$(echo "$_MON_CONN" | grep -v "$mon_pri")
+	# Get current resolution of main monitor, or the preferred one if it is
+	# not enabled, and the preferred resolution for second monitor
+	mon_pri_res=$(mon_get_curres "$mon_pri")
+	if [ -z "$mon_pri_res" ]; then
+		mon_pri_res=$(mon_get_prefres "$mon_pri")
+	fi
+	mon_sec_res=$(mon_get_prefres "$mon_sec")
+	# Get scale ratios
+	mon_pri_w=$(echo "$mon_pri_res" | awk -F 'x' '{print $1}')
+	mon_pri_h=$(echo "$mon_pri_res" | awk -F 'x' '{print $2}')
+	mon_sec_w=$(echo "$mon_sec_res" | awk -F 'x' '{print $1}')
+	mon_sec_h=$(echo "$mon_sec_res" | awk -F 'x' '{print $2}')
+	scale_x=$(echo "$mon_pri_w / $mon_sec_w" | bc -l)
+	scale_y=$(echo "$mon_pri_h / $mon_sec_h" | bc -l)
+	# Mirror monitor
+	xrandr --output "$mon_pri" --primary --mode "$mon_pri_res" --scale 1.0x1.0 \
+               --output "$mon_sec" --auto --same-as "$mon_pri" --scale "$scale_x"x"$scale_y"
+}
+
+case "$_MON_N" in
+2)
+	action=$(echo -e "Extend monitor\nMirror monitor" | dmenu -i -p "Select action:")
+	case "$action" in
+	"Extend monitor")
+		extend ;;
+	"Mirror monitor")
+		mirror ;;
+	*)
+		exit 1 ;;
+	esac
+	;;
 *)
-	exit 1
+	exit
 	;;
-
 esac
