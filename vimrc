@@ -1,3 +1,7 @@
+
+source ~/.config/vim/bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect('~/.config/vim/bundle/{}')
+
 " Color scheme - Base16 Vim (https://github.com/chriskempson/base16-vim)
 " Comment 'let base16colorspace=256' when
 "     a) not using Base16 Shell or a 256 terminal scheme, or
@@ -26,3 +30,7 @@ set laststatus=1
 
 " Show the cursor position
 set ruler
+
+filetype plugin indent on
+
+let g:tex_flavor='latex'
