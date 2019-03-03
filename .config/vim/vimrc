@@ -1,17 +1,27 @@
-
+" Pathogen
 source ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect('~/.vim/bundle/{}')
 
-" Color scheme - Base16 Vim (https://github.com/chriskempson/base16-vim)
-" Comment 'let base16colorspace=256' when
-"     a) not using Base16 Shell or a 256 terminal scheme, or
-"     b) Base16 Shell or a 256 terminal scheme does not work in the terminal
+" Plugin: Base16 Vim (https://github.com/chriskempson/base16-vim)
+"
+" base16colorspace
+" (see https://github.com/chriskempson/base16-vim#256-colorspace)
 let base16colorspace=256
-" Base16 scheme name
-colorscheme base16-default-dark
+
+" Plugin: vim-latex (http://vim-latex.sourceforge.net)
+"
+" Change default empty .tex file type from 'plaintex' to 'tex'
+" (see http://vim-latex.sourceforge.net/documentation/latex-suite/recommended-settings.html)
+let g:tex_flavor='latex'
 
 " Make Vim behave in a more useful way
 set nocompatible
+
+" Enable file type detection, loading plugin files and indent files
+filetype plugin indent on
+
+" Enable sytax highlight
+syntax on
 
 " Enable line numbers
 set number
@@ -22,15 +32,12 @@ set relativenumber
 " Highlight current line
 set cursorline
 
-" Enable sytax highlight
-syntax on
-
 " Always show status line
 set laststatus=1
 
 " Show the cursor position
 set ruler
 
-filetype plugin indent on
+" Colorscheme
+colorscheme base16-default-dark
 
-let g:tex_flavor='latex'
