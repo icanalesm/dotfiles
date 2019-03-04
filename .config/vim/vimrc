@@ -8,12 +8,6 @@ execute pathogen#infect('~/.vim/bundle/{}')
 " (see https://github.com/chriskempson/base16-vim#256-colorspace)
 let base16colorspace=256
 
-" Plugin: vim-latex (http://vim-latex.sourceforge.net)
-"
-" Change default empty .tex file type from 'plaintex' to 'tex'
-" (see http://vim-latex.sourceforge.net/documentation/latex-suite/recommended-settings.html)
-let g:tex_flavor='latex'
-
 " Make Vim behave in a more useful way
 set nocompatible
 
@@ -41,3 +35,23 @@ set ruler
 " Colorscheme
 colorscheme base16-default-dark
 
+"Splits
+"
+" Open splits at the bottom and right
+set splitbelow splitright
+" Split navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Plugin: vim-latex (http://vim-latex.sourceforge.net)
+"
+" Change default empty .tex file type from 'plaintex' to 'tex'
+" (see http://vim-latex.sourceforge.net/documentation/latex-suite/recommended-settings.html)
+let g:tex_flavor='latex'
+" Change default <C-j> for placeholders (it conflicts with split navigation)
+" (see http://vim-latex.sourceforge.net/documentation/latex-suite/latex-suite-maps.html)
+imap <Nul> <Plug>IMAP_JumpForward
+nmap <Nul> <Plug>IMAP_JumpForward
+vmap <Nul> <Plug>IMAP_JumpForward
