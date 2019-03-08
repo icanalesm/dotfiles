@@ -15,6 +15,8 @@
 #	unset f
 #fi
 
+xcalib ${HOME}/.config/color/icc/ColorLCD-CB5A19E1-6C20-C98E-BB2D-70FC3BB550B4.icc
+
 setxkbmap -layout es -model apple_laptop
 
 exec dwm
