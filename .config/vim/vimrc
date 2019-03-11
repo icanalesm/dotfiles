@@ -2,12 +2,6 @@
 source ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect('~/.vim/bundle/{}')
 
-" Plugin: Base16 Vim (https://github.com/chriskempson/base16-vim)
-"
-" base16colorspace
-" (see https://github.com/chriskempson/base16-vim#256-colorspace)
-let base16colorspace=256
-
 " Make Vim behave in a more useful way
 set nocompatible
 
@@ -27,13 +21,13 @@ set relativenumber
 set cursorline
 
 " Always show status line
-set laststatus=1
+set laststatus=2
 
 " Show the cursor position
 set ruler
 
-" Colorscheme
-colorscheme base16-default-dark
+" Configure backspace
+set backspace=indent,eol,start
 
 "Splits
 "
@@ -45,7 +39,18 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Plugin: vim-latex (http://vim-latex.sourceforge.net)
+" Plugin: Base16 Vim
+"         (https://github.com/chriskempson/base16-vim)
+"
+" base16colorspace
+" (see https://github.com/chriskempson/base16-vim#256-colorspace)
+let base16colorspace=256
+
+" Colorscheme
+colorscheme base16-default-dark
+
+" Plugin: vim-latex
+"         (http://vim-latex.sourceforge.net)
 "
 " Change default empty .tex file type from 'plaintex' to 'tex'
 " (see http://vim-latex.sourceforge.net/documentation/latex-suite/recommended-settings.html)
