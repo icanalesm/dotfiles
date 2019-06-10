@@ -5,8 +5,8 @@ execute pathogen#infect('~/.vim/bundle/{}')
 " Make Vim behave in a more useful way
 set nocompatible
 
-" Enable file type detection, loading plugin files and indent files
-filetype plugin indent on
+" Enable file type detection and loading plugin files
+filetype plugin on
 
 " Enable sytax highlight
 syntax on
