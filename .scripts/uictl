@@ -1,0 +1,102 @@
+#!/bin/sh
+
+KBD_DEV="dell::kbd_backlight"
+KBD_CMD_BRIGHTDN="sudo /usr/local/bin/brightctl kbd -16"
+KBD_CMD_BRIGHTUP="sudo /usr/local/bin/brightctl kbd +16"
+
+MON_DEV="intel_backlight"
+MON_CMD_BRIGHTDN="sudo /usr/local/bin/brightctl screen -2400"
+MON_CMD_BRIGHTUP="sudo /usr/local/bin/brightctl screen +2400"
+
+VOL_CMD_VOLUMEDN="amixer set Master 3dB- unmute"
+VOL_CMD_VOLUMEUP="amixer set Master 3dB+ unmute"
+VOL_CMD_TOGGLE="amixer set Master toggle"
+
+# progbar <progress_pct> <item_total> <item_style_filled> <item_style_empty>
+progbar()
+{
+	_filled=$((($1 * $2) / 100))
+	_empty=$(($2 - $_filled))
+	echo "$(printf "%${_filled}s" | sed "s| |$3|g")$(printf "%${_empty}s" | sed "s| |$4|g")"
+}
+
+case $1 in
+
+kbdbright)
+
+	case $2 in
+	down)
+		${KBD_CMD_BRIGHTDN}
+		;;
+	up)
+		${KBD_CMD_BRIGHTUP}
+		;;
+	*)
+		exit 1
+		;;
+	esac
+	# Get current and maximum
+	read cur < "/sys/class/leds/$KBD_DEV/brightness"
+	read max < "/sys/class/leds/$KBD_DEV/max_brightness"
+	# Display notificaation
+	bar=$(progbar $(($cur * 100 / $max)) 10 "$(printf "\uf192") " "$(printf "\uf111") ")
+	notify-send -a "uictl" -u low -h string:x-canonical-private-synchronous:uictl-notif "Keyboard backlight" "$bar"
+	;;
+
+monbright)
+
+	case $2 in
+	down)
+		${MON_CMD_BRIGHTDN}
+		;;
+	up)
+		${MON_CMD_BRIGHTUP}
+		;;
+	*)
+		exit 1
+		;;
+	esac
+	# Get current and maximum
+	read cur < "/sys/class/backlight/$MON_DEV/brightness"
+	read max < "/sys/class/backlight/$MON_DEV/max_brightness"
+	# Display notificaation
+	bar=$(progbar $(($cur * 100 / $max)) 10 "$(printf "\uf192") " "$(printf "\uf111") ")
+	notify-send -a "uictl" -u low -h string:x-canonical-private-synchronous:uictl-notif "Monitor backlight" "$bar"
+	;;
+
+volume)
+
+	case $2 in
+	down)
+		cmd=${VOL_CMD_VOLUMEDN}
+		;;
+	up)
+		cmd=${VOL_CMD_VOLUMEUP}
+		;;
+	toggle)
+		cmd=${VOL_CMD_TOGGLE}
+		;;
+	*)
+		exit 1
+		;;
+	esac
+	# Execute command and get volume percentage and mute switch status
+	data=$($cmd | awk -F "[][%]" 'END{ print $2, $7 }')
+	read vol mute <<- EOF
+	$data
+	EOF
+	# Display notificaation
+	if [[ "$mute" == "off" ]]; then
+		vol=0
+	fi
+	bar=$(progbar $vol 10 "$(printf "\uf192") " "$(printf "\uf111") ")
+	notify-send -a "uictl" -u low -h string:x-canonical-private-synchronous:uictl-notif "Volume" "$bar"
+#	canberra-gtk-play -i audio-volume-change -d "changeVolume"
+	# Update status text
+	tstat set
+	;;
+
+*)
+	;;
+
+esac
