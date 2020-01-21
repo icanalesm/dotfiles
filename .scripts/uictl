@@ -12,13 +12,13 @@ VOL_CMD_VOLUMEDN="amixer set Master 3dB- unmute"
 VOL_CMD_VOLUMEUP="amixer set Master 3dB+ unmute"
 VOL_CMD_TOGGLE="amixer set Master toggle"
 
-NOTIFICATION_OPTS="-a \"uictl\" -u low -t 1000 -h string:x-canonical-private-synchronous:uictl-notif"
+NOTIFICATION_OPTS="-a uictl -u low -t 1000 -h string:x-canonical-private-synchronous:uictl-notif"
 
 # progbar <progress_pct> <item_total> <item_style_filled> <item_style_empty>
 progbar()
 {
 	_filled=$((($1 * $2) / 100))
-	_empty=$(($2 - $_filled))
+	_empty=$(($2 - _filled))
 	echo "$(printf "%${_filled}s" | sed "s| |$3|g")$(printf "%${_empty}s" | sed "s| |$4|g")"
 }
 
@@ -38,11 +38,11 @@ kbdbright)
 		;;
 	esac
 	# Get current and maximum
-	read cur < "/sys/class/leds/$KBD_DEV/brightness"
-	read max < "/sys/class/leds/$KBD_DEV/max_brightness"
+	read -r cur < "/sys/class/leds/$KBD_DEV/brightness"
+	read -r max < "/sys/class/leds/$KBD_DEV/max_brightness"
 	# Display notificaation
-	bar=$(progbar $(($cur * 100 / $max)) 10 "$(printf "\uf192") " "$(printf "\uf111") ")
-	notify-send $NOTIFICATION_OPTS "Keyboard backlight" "$bar"
+	bar=$(progbar $((cur * 100 / max)) 10 "$(printf "\uf192") " "$(printf "\uf111") ")
+	notify-send "$NOTIFICATION_OPTS" "Keyboard backlight" "$bar"
 	;;
 
 monbright)
@@ -59,11 +59,11 @@ monbright)
 		;;
 	esac
 	# Get current and maximum
-	read cur < "/sys/class/backlight/$MON_DEV/brightness"
-	read max < "/sys/class/backlight/$MON_DEV/max_brightness"
+	read -r cur < "/sys/class/backlight/$MON_DEV/brightness"
+	read -r max < "/sys/class/backlight/$MON_DEV/max_brightness"
 	# Display notificaation
-	bar=$(progbar $(($cur * 100 / $max)) 10 "$(printf "\uf192") " "$(printf "\uf111") ")
-	notify-send $NOTIFICATION_OPTS "Monitor backlight" "$bar"
+	bar=$(progbar $((cur * 100 / max)) 10 "$(printf "\uf192") " "$(printf "\uf111") ")
+	notify-send "$NOTIFICATION_OPTS" "Monitor backlight" "$bar"
 	;;
 
 volume)
@@ -84,15 +84,15 @@ volume)
 	esac
 	# Execute command and get volume percentage and mute switch status
 	data=$($cmd | awk -F "[][%]" 'END{ print $2, $7 }')
-	read vol mute <<- EOF
+	read -r vol mute <<- EOF
 	$data
 	EOF
 	# Display notificaation
-	if [[ "$mute" == "off" ]]; then
+	if [ "$mute" = "off" ]; then
 		vol=0
 	fi
 	bar=$(progbar $vol 10 "$(printf "\uf192") " "$(printf "\uf111") ")
-	notify-send $NOTIFICATION_OPTS "Volume" "$bar"
+	notify-send "$NOTIFICATION_OPTS" "Volume" "$bar"
 #	canberra-gtk-play -i audio-volume-change -d "changeVolume"
 	# Update status text
 	tstat set
