@@ -2,6 +2,16 @@
 source ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect('~/.vim/bundle/{}')
 
+" Plugin: Base16 Vim
+"         (https://github.com/chriskempson/base16-vim)
+"
+" base16colorspace
+" (see https://github.com/chriskempson/base16-vim#256-colorspace)
+let base16colorspace=256
+
+" Colorscheme
+colorscheme base16-default-dark
+
 " Make Vim behave in a more useful way
 set nocompatible
 
@@ -19,6 +29,9 @@ set relativenumber
 
 " Highlight current line
 set cursorline
+" Format of current line number
+" (must be after colorscheme because base16-vim resets the syntax)
+hi CursorLineNr cterm=bold
 
 " Always show status line
 set laststatus=2
@@ -38,16 +51,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-" Plugin: Base16 Vim
-"         (https://github.com/chriskempson/base16-vim)
-"
-" base16colorspace
-" (see https://github.com/chriskempson/base16-vim#256-colorspace)
-let base16colorspace=256
-
-" Colorscheme
-colorscheme base16-default-dark
 
 " Plugin: vim-latex
 "         (http://vim-latex.sourceforge.net)
