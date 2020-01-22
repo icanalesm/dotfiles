@@ -12,10 +12,10 @@ fi
 # Theme to use
 BASE16_THEME="base16-default-dark"
 # Location of theme scripts
-BASE16_SHELL_SCRIPTS="$HOME/.config/bash/base16-shell/scripts"
+BASE16_SHELL_SCRIPTS="$HOME"/.config/bash/base16-shell/scripts
 # Apply theme
 script="$BASE16_SHELL_SCRIPTS/$BASE16_THEME.sh"
-[ -r "$script" ] && [ -f "$script" ] && source "$script"
+[ -r "$script" ] && [ -f "$script" ] && . "$script"
 
 unset BASE16_THEME
 unset BASE16_SHELL_SCRIPTS

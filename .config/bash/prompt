@@ -2,7 +2,7 @@
 
 exitstatus()
 {
-	if [ $? == 0 ]; then
+	if [ $? -eq 0 ]; then
 		echo ":)";
 	else
 		echo ":(";
@@ -33,7 +33,7 @@ magenta="\033[35m"
 #magenta="\033[38;5;62m"
 
 # Highlight the user name when logged in as root
-if [ "$USER" == "root" ]; then
+if [ "$USER" = "root" ]; then
 	userStyle="$bold$red";
 else
 	userStyle="$blue";
@@ -47,12 +47,8 @@ else
 fi;
 
 ## Set the terminal prompt
-PS1="\[$userStyle\]\u\[$reset\]"   # username
-PS1+="\[$gray\]@"
-PS1+="\[$hostStyle\]\h\[$reset\]"  # host
-PS1+="\[$gray\]:"
-PS1+="\[$green\]\W"                # working directory
-PS1+="\[$reset\] \$(exitstatus) "  # status of last executed command
+#      username                         @  host                             :  working dir          status last cmd
+PS1="\[$userStyle\]\u\[$reset\]\[$gray\]@\[$hostStyle\]\h\[$reset\]\[$gray\]:\[$green\]\W\[$reset\] \$(exitstatus) "
 export PS1
 
 unset bold
@@ -63,4 +59,5 @@ unset green
 unset red
 unset magenta
 unset userStyle
-unset hostStyle 
+unset hostStyle
+
