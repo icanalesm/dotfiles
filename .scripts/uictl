@@ -1,18 +1,20 @@
 #!/bin/sh
 
 KBD_DEV="smc::kbd_backlight"
-KBD_CMD_BRIGHTDN="sudo /usr/local/bin/brightctl kbd -16"
-KBD_CMD_BRIGHTUP="sudo /usr/local/bin/brightctl kbd +16"
+kbd_cmd_brightdn() { sudo /usr/local/bin/brightctl kbd -16; }
+kbd_cmd_brightup() { sudo /usr/local/bin/brightctl kbd +16; }
 
 MON_DEV="acpi_video0"
-MON_CMD_BRIGHTDN="sudo /usr/local/bin/brightctl screen -1"
-MON_CMD_BRIGHTUP="sudo /usr/local/bin/brightctl screen +1"
+mon_cmd_brightdn() { sudo /usr/local/bin/brightctl screen -1; }
+mon_cmd_brightup() { sudo /usr/local/bin/brightctl screen +1; }
 
-VOL_CMD_VOLUMEDN="amixer set Master 3dB- unmute"
-VOL_CMD_VOLUMEUP="amixer set Master 3dB+ unmute"
-VOL_CMD_TOGGLE="amixer set Master toggle"
+VOL_DEV="Master"
+vol_cmd_volumedn() { amixer set "$VOL_DEV" 3db- unmute; }
+vol_cmd_volumeup() { amixer set "$VOL_DEV" 3db+ unmute; }
+vol_cmd_toggle()   { amixer set "$VOL_DEV" toggle; }
 
-NOTIFICATION_OPTS="-a uictl -u low -t 1000 -h string:x-canonical-private-synchronous:uictl-notif"
+ITEM_FILLED="$(printf "\uf192") "
+ITEM_EMPTY="$(printf "\uf111") "
 
 # progbar <progress_pct> <item_total> <item_style_filled> <item_style_empty>
 progbar()
@@ -22,16 +24,22 @@ progbar()
 	echo "$(printf "%${_filled}s" | sed "s| |$3|g")$(printf "%${_empty}s" | sed "s| |$4|g")"
 }
 
+# notify <summary> <body>
+notify()
+{
+	notify-send -a uictl -u low -t 1000 -h string:x-canonical-private-synchronous:uictl-notif "$1" "$2"
+}
+
 case $1 in
 
 kbdbright)
 
 	case $2 in
 	down)
-		${KBD_CMD_BRIGHTDN}
+		kbd_cmd_brightdn
 		;;
 	up)
-		${KBD_CMD_BRIGHTUP}
+		kbd_cmd_brightup
 		;;
 	*)
 		exit 1
@@ -41,18 +49,18 @@ kbdbright)
 	read -r cur < "/sys/class/leds/$KBD_DEV/brightness"
 	read -r max < "/sys/class/leds/$KBD_DEV/max_brightness"
 	# Display notificaation
-	bar=$(progbar $((cur * 100 / max)) 10 "$(printf "\uf192") " "$(printf "\uf111") ")
-	notify-send "$NOTIFICATION_OPTS" "Keyboard backlight" "$bar"
+	bar=$(progbar $((cur * 100 / max)) 10 "$ITEM_FILLED" "$ITEM_EMPTY")
+	notify "Keyboard backlight" "$bar"
 	;;
 
 monbright)
 
 	case $2 in
 	down)
-		${MON_CMD_BRIGHTDN}
+		mon_cmd_brightdn
 		;;
 	up)
-		${MON_CMD_BRIGHTUP}
+		mon_cmd_brightup
 		;;
 	*)
 		exit 1
@@ -62,28 +70,29 @@ monbright)
 	read -r cur < "/sys/class/backlight/$MON_DEV/brightness"
 	read -r max < "/sys/class/backlight/$MON_DEV/max_brightness"
 	# Display notificaation
-	bar=$(progbar $((cur * 100 / max)) 10 "$(printf "\uf192") " "$(printf "\uf111") ")
-	notify-send "$NOTIFICATION_OPTS" "Monitor backlight" "$bar"
+	bar=$(progbar $((cur * 100 / max)) 10 "$ITEM_FILLED" "$ITEM_EMPTY")
+	echo "$NOTIFICATION_OPTS"
+	notify "Monitor backlight" "$bar"
 	;;
 
 volume)
 
 	case $2 in
 	down)
-		cmd=${VOL_CMD_VOLUMEDN}
+		tmp=$(vol_cmd_volumedn)
 		;;
 	up)
-		cmd=${VOL_CMD_VOLUMEUP}
+		tmp=$(vol_cmd_volumeup)
 		;;
 	toggle)
-		cmd=${VOL_CMD_TOGGLE}
+		tmp=$(vol_cmd_toggle)
 		;;
 	*)
 		exit 1
 		;;
 	esac
-	# Execute command and get volume percentage and mute switch status
-	data=$($cmd | awk -F "[][%]" 'END{ print $2, $7 }')
+	# Get volume percentage and mute status from amixer output
+	data=$(echo "$tmp" | awk -F "[][%]" 'END{ print $2, $7 }')
 	read -r vol mute <<- EOF
 	$data
 	EOF
@@ -91,8 +100,8 @@ volume)
 	if [ "$mute" = "off" ]; then
 		vol=0
 	fi
-	bar=$(progbar $vol 10 "$(printf "\uf192") " "$(printf "\uf111") ")
-	notify-send "$NOTIFICATION_OPTS" "Volume" "$bar"
+	bar=$(progbar $vol 10 "$ITEM_FILLED" "$ITEM_EMPTY")
+	notify "Volume" "$bar"
 #	canberra-gtk-play -i audio-volume-change -d "changeVolume"
 	# Update status text
 	tstat set
