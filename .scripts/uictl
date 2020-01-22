@@ -71,7 +71,6 @@ monbright)
 	read -r max < "/sys/class/backlight/$MON_DEV/max_brightness"
 	# Display notificaation
 	bar=$(progbar $((cur * 100 / max)) 10 "$ITEM_FILLED" "$ITEM_EMPTY")
-	echo "$NOTIFICATION_OPTS"
 	notify "Monitor backlight" "$bar"
 	;;
 
