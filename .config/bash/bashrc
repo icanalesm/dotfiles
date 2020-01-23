@@ -4,11 +4,11 @@
 [ -z "$PS1" ] && return
 
 # Load configuration scripts
-script="$HOME"/.config/bash/colours
+script="$HOME/.config/bash/colours"
 [ -r "$script" ] && [ -f "$script" ] && . "$script"
-script="$HOME"/.config/bash/aliases
+script="$HOME/.config/bash/aliases"
 [ -r "$script" ] && [ -f "$script" ] && . "$script"
-script="$HOME"/.config/bash/prompt
+script="$HOME/.config/bash/prompt"
 [ -r "$script" ] && [ -f "$script" ] && . "$script"
 
 unset script

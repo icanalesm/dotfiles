@@ -12,10 +12,10 @@ Darwin*)
 Linux*)
 	# SSH_AUTH_SOCK, SSH_AGENT_PID
 	if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-		ssh-agent > "$HOME"/.ssh-agent
+		ssh-agent > "$HOME/.ssh-agent"
 	fi
 	if [ -z "$SSH_AUTH_SOCK" ]; then
-		. "$HOME"/.ssh-agent > /dev/null
+		. "$HOME/.ssh-agent" > /dev/null
 	fi
 	;;
 *)
@@ -23,5 +23,5 @@ Linux*)
 esac
 
 # Source $HOME/.bashrc
-[ -r "$HOME"/.bashrc ] && [ -f "$HOME"/.bashrc ] && . "$HOME"/.bashrc;
+[ -r "$HOME/.bashrc" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
