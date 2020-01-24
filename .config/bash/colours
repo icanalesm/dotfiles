@@ -8,16 +8,11 @@ else
 fi
 
 # Colours for Bash - Base16 Shell (https://github.com/chriskempson/base16-shell)
-# These lines are taken from profile_helper.sh 
-# Theme to use
-BASE16_THEME="base16-default-dark"
-# Location of base16-shell
+export BASE16_THEME="base16-default-dark"
 BASE16_SHELL="$HOME/.config/bash/base16-shell"
-# Apply theme
 script="$BASE16_SHELL/scripts/$BASE16_THEME.sh"
 [ -r "$script" ] && [ -f "$script" ] && . "$script"
 
-unset BASE16_THEME
 unset BASE16_SHELL
 unset script
 
