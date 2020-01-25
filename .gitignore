@@ -16,3 +16,5 @@ Thumbs.db
 ##########
 .config/vim/bundle/
 .config/vim/viminfo
+
+.local/share/
