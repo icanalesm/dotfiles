@@ -1,0 +1,21 @@
+#!/bin/sh
+
+## Keyboard
+
+setxkbmap -layout us
+
+## Display
+
+DISPLAY_NAME=eDP-1
+DISPLAY_MODE=1920x1080
+DISPLAY_RATE=60
+DISPLAY_DPI=96
+
+if [ $GPU = "dGPU" ]; then
+	DISPLAY_NAME=eDP-1-1
+	xrandr --setprovideroutputsource modesetting NVIDIA-0
+fi
+
+xrandr --output "$DISPLAY_NAME" --mode "$DISPLAY_MODE" --rate "$DISPLAY_RATE" --primary
+xrandr --dpi "$DISPLAY_DPI"
+
