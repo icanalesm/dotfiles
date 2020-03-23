@@ -10,6 +10,8 @@ Darwin*)
 	# SSH_AUTH_SOCK - Automatically set by macOS
 	;;
 Linux*)
+	# PATH
+	export PATH="$HOME/.local/bin:$PATH"
 	# SSH_AUTH_SOCK, SSH_AGENT_PID
 	if ! pgrep -u "$USER" ssh-agent > /dev/null; then
 		ssh-agent > "$HOME/.ssh-agent"
