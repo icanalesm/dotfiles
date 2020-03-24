@@ -1,0 +1,18 @@
+#!/bin/sh
+
+## Keyboard
+
+setxkbmap -layout es -model apple_laptop
+
+## Display
+
+DISPLAY_NAME=LVDS-1
+DISPLAY_MODE=1280x800
+DISPLAY_RATE=60
+DISPLAY_DPI=96
+
+xrandr --output "$DISPLAY_NAME" --mode "$DISPLAY_MODE" --rate "$DISPLAY_RATE" --primary
+xrandr --dpi "$DISPLAY_DPI"
+
+xcalib "$HOME/.config/color/icc/ColorLCD-CB5A19E1-6C20-C98E-BB2D-70FC3BB550B4.icc"
+
