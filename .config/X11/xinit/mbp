@@ -2,7 +2,7 @@
 
 ## Keyboard
 
-setxkbmap -layout es -model apple_laptop
+setxkbmap -model apple_laptop -layout es
 
 ## Display
 

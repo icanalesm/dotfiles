@@ -2,7 +2,7 @@
 
 ## Keyboard
 
-setxkbmap -layout us
+setxkbmap -model dell -layout us
 
 ## Display
 
