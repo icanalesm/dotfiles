@@ -2,7 +2,7 @@
 
 ## Keyboard
 
-setxkbmap -model dell -layout us -variant intl
+setxkbmap -model dell -layout us -variant altgr-intl
 
 ## Display
 
