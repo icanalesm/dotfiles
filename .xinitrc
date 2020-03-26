@@ -19,5 +19,9 @@
 
 dunst &
 
+[ ! -d "$HOME/.local/share/uictl" ] && mkdir -p "$HOME/.local/share/uictl"
+echo "DISPLAY=$DISPLAY" > "$HOME/.local/share/uictl/env"
+chmod 400 "$HOME/.local/share/uictl/env"
+
 exec dwm
 
