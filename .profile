@@ -11,11 +11,9 @@ Linux*)
 	# PATH
 	export PATH="$HOME/.local/bin:$PATH"
 	# SSH_AUTH_SOCK, SSH_AGENT_PID
-	if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-		ssh-agent > "$HOME/.ssh/agent"
-		chmod 600 "$HOME/.ssh/agent"
-	fi
-	[ -z "$SSH_AUTH_SOCK" ] && . "$HOME/.ssh/agent"
+	file="$HOME/.ssh/agent"
+	! pgrep -u "$USER" ssh-agent > /dev/null && ssh-agent > "$file"; chmod 600 "$file"
+	[ -z "$SSH_AUTH_SOCK" ] && . "$file"
 	;;
 *)
 	;;
