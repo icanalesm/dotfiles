@@ -25,6 +25,9 @@ esac
 export PAGER="less"
 export EDITOR="vim"
 
+## Configuration
+export LESSHISTFILE="-"
+
 # Source $HOME/.bashrc
 [ -r "$HOME/.bashrc" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
