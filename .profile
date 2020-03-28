@@ -17,9 +17,7 @@ Linux*)
 		ssh-agent > "$HOME/.ssh/agent"
 		chmod 600 "$HOME/.ssh/agent"
 	fi
-	if [ -z "$SSH_AUTH_SOCK" ]; then
-		. "$HOME/.ssh/agent" > /dev/null
-	fi
+	[ -z "$SSH_AUTH_SOCK" ] && . "$HOME/.ssh/agent"
 	;;
 *)
 	;;
