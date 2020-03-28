@@ -1,8 +1,6 @@
 #!/bin/sh
 
-# Environment variables
-export PAGER="less"
-export EDITOR="vim"
+## PATH and variables for ssh
 case $(uname -s) in
 Darwin*)
 	# PATH - Update for Macports
@@ -22,6 +20,10 @@ Linux*)
 *)
 	;;
 esac
+
+## Default programs
+export PAGER="less"
+export EDITOR="vim"
 
 # Source $HOME/.bashrc
 [ -r "$HOME/.bashrc" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
