@@ -12,7 +12,7 @@ Linux*)
 	export PATH="$HOME/.local/bin:$PATH"
 	# SSH_AUTH_SOCK, SSH_AGENT_PID
 	file="$HOME/.ssh/agent"
-	! pgrep -u "$USER" ssh-agent > /dev/null && ssh-agent > "$file"; chmod 600 "$file"
+	! pgrep -u "$USER" ssh-agent > /dev/null && { ssh-agent > "$file"; chmod 600 "$file"; }
 	[ -z "$SSH_AUTH_SOCK" ] && . "$file" > /dev/null
 	;;
 *)
