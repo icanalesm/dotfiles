@@ -2,7 +2,6 @@
 
 case $GPU in
 	dGPU) X11_CONF_DISPLAY="display-nvidia-xrandr.conf" ;;
-	iGPU) X11_CONF_DISPLAY="display-nvidia-prime.conf" ;;
 	*)    X11_CONF_DISPLAY="/dev/null" ;;
 esac
 
