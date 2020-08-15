@@ -1,0 +1,15 @@
+#!/bin/sh
+
+X11_CONF_DISPLAY="$HOME/.config/X11/xorg/20-display.conf"
+case $GRAPHICS_OFFLOAD in
+	PRIME) X11_CONF_OFFLOAD="$HOME/.config/X11/xorg/display-nvidia-prime.conf" ;;
+	*)     X11_CONF_OFFLOAD="/dev/null" ;;
+esac
+
+if [ "$(stat -L -c "%d:%i" "$X11_CONF_DISPLAY")" != "$(stat -c "%d:%i" "$X11_CONF_OFFLOAD")" ]; then
+	[ "$X11_CONF_OFFLOAD" != "/dev/null" ] && X11_CONF_OFFLOAD=$(basename "$X11_CONF_OFFLOAD")
+	ln -sf "$X11_CONF_OFFLOAD" "$X11_CONF_DISPLAY"
+fi
+
+/usr/bin/startx
+
