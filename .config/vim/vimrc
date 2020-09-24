@@ -38,8 +38,6 @@ set cursorline
 " (must be after colorscheme because base16-vim resets the syntax)
 hi CursorLineNr cterm=bold
 
-"Splits
-"
 " Open splits at the bottom and right
 set splitbelow splitright
 " Split navigation
@@ -48,20 +46,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Plugin: vim-latex
-"         (http://vim-latex.sourceforge.net)
+" Plugin: vimtex
+"         (https://github.com/lervag/vimtex)
 "
-" Change default empty .tex file type from 'plaintex' to 'tex'
-" (see http://vim-latex.sourceforge.net/documentation/latex-suite/recommended-settings.html)
+" Change default .tex file type from 'plaintex' to 'tex'
+" (see https://github.com/lervag/vimtex/wiki/introduction#comment-on-internal-tex-plugin)
 let g:tex_flavor='latex'
-" Change default <C-j> for placeholders (it conflicts with split navigation)
-" (see http://vim-latex.sourceforge.net/documentation/latex-suite/latex-suite-maps.html)
-imap <Nul> <Plug>IMAP_JumpForward
-nmap <Nul> <Plug>IMAP_JumpForward
-vmap <Nul> <Plug>IMAP_JumpForward
-" Folding configuration
-let g:Tex_Folding=0
-" Compiler configuration
-let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_CompileRule_pdf='pdflatex -synctex=1 -interaction=nonstopmode $*'
-let g:Tex_GotoError=0
