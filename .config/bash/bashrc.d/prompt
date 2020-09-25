@@ -1,7 +1,5 @@
 #!/bin/bash
 
-exitstatus() { if [ $? -eq 0 ]; then echo ":)"; else echo ":("; fi }
-
 # Text format
 bold="\033[1m"
 reset="\033[0m"
@@ -21,21 +19,30 @@ magenta="\033[35m"
 
 # Highlight the user name when logged in as root
 if [ "$USER" = "root" ]; then
-	user="\[$bold$red\]\u\[$reset\]";
+	user_sty="$bold$red";
 else
-	user="\[$blue\]\u\[$reset\]";
+	user_sty="$blue";
 fi;
 
 # Highlight the hostname when connected via SSH
 if [ "$SSH_TTY" ]; then
-	host="\[$bold$red\]\h\[$reset\]";
+	host_sty="$bold$red";
 else
-	host="\[$magenta\]\h\[$reset\]";
+	host_sty="$magenta";
 fi;
 
-## Set the terminal prompt
-#  user@host:dir stat_last_cmd
-export PS1="$user\[$gray\]@$host\[$gray\]:\[$green\]\W\[$reset\] \$(exitstatus) "
+exitstatus()
+{
+	if [ $? -eq 0 ]; then
+		echo ":)"
+	else
+		echo ":("
+	fi
+}
+
+# Set the terminal prompt
+# user@host:dir stat_last_cmd
+export PS1="\[$user_sty\]\u\[$reset$gray\]@\[$host_sty\]\h\[$reset$gray\]:\[$green\]\W\[$reset\] \$(exitstatus) "
 
 unset bold
 unset reset
@@ -44,6 +51,6 @@ unset gray
 unset green
 unset red
 unset magenta
-unset user
-unset host
+unset user_sty
+unset host_sty
 

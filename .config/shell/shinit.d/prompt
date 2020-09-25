@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# Text format
+bold="\033[1m"
+reset="\033[0m"
+
+# Text colours
+#
+# To see the full range of supported colours:
+#
+#     for c in {0..255}; do printf "\033[38;5;%sm %s \033[0m" $c $c; done; echo;
+#
+# Default colours
+blue="\033[34m"
+gray="\033[90m"
+green="\033[32m"
+red="\033[31m"
+magenta="\033[35m"
+
+# Highlight the user name when logged in as root
+if [ "$USER" = "root" ]; then
+	user_sty="$bold$red";
+else
+	user_sty="$blue";
+fi;
+
+# Highlight the hostname when connected via SSH
+if [ "$SSH_TTY" ]; then
+	host_sty="$bold$red";
+else
+	host_sty="$magenta";
+fi;
+
+PS1_fmt="$user_sty$USER$reset$gray@$host_sty$(hostname -s)$reset$gray:$green%s$reset %s "
+
+prompt()
+{
+	if [ $? -eq 0 ]; then
+		stat=":)"
+	else
+		stat=":("
+	fi
+	printf "$PS1_fmt" "$(basename "$PWD")" "$stat"
+}
+
+# Set the terminal prompt
+# user@host:dir stat_last_cmd
+export PS1="\$(prompt)"
+
+unset bold
+unset reset
+unset blue
+unset gray
+unset green
+unset red
+unset magenta
+unset user_sty
+unset host_sty
+

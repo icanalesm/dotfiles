@@ -24,8 +24,8 @@ export PAGER="less"
 export EDITOR="vim"
 
 ## Configuration
+export ENV="$HOME/.config/shell/shinit"
 export LESSHISTFILE="-"
 
-# Source $HOME/.bashrc
-[ -r "$HOME/.bashrc" ] && [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+[ -r "$ENV" ] && . "$ENV"
 

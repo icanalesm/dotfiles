@@ -3,13 +3,12 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# Load configuration scripts
-script="$HOME/.config/bash/colours"
-[ -r "$script" ] && [ -f "$script" ] && . "$script"
-script="$HOME/.config/bash/aliases"
-[ -r "$script" ] && [ -f "$script" ] && . "$script"
-script="$HOME/.config/bash/prompt"
-[ -r "$script" ] && [ -f "$script" ] && . "$script"
+script="$HOME/.config/shell/shinit.d/aliases"
+[ -r "$script" ] && . "$script"
+script="$HOME/.config/shell/shinit.d/colours"
+[ -r "$script" ] && . "$script"
+script="$HOME/.config/bash/bashrc.d/prompt"
+[ -r "$script" ] && . "$script"
 
 unset script
 

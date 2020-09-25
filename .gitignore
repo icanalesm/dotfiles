@@ -8,9 +8,9 @@
 ehthumbs.db
 Thumbs.db
 
-# bash
+# shell
 ##########
-.config/bash/base16-shell/
+.config/shell/base16-shell/
 
 # vim
 ##########
