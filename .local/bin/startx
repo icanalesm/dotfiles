@@ -11,5 +11,5 @@ if [ "$(stat -L -c "%d:%i" "$X11_CONF_DISPLAY")" != "$(stat -c "%d:%i" "$X11_CON
 	ln -sf "$X11_CONF_OFFLOAD" "$X11_CONF_DISPLAY"
 fi
 
-/usr/bin/startx
+exec /usr/bin/startx
 
