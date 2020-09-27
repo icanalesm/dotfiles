@@ -1,0 +1,44 @@
+#!/bin/sh
+
+#[ -f "/etc/X11/xinit/.Xresources" ] xrdb -merge "/etc/X11/xinit/.Xresources"
+
+#[ -f "/etc/X11/xinit/.Xmodmap" ] && xmodmap "/etc/X11/xinit/.Xmodmap"
+
+[ -f "$HOME/.Xresources" ] && xrdb -merge "$HOME/.Xresources"
+
+#[ -f "$HOME/.Xmodmap" ] && xmodmap "$HOME/.Xmodmap"
+
+#if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+#	for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+#		[ -x "$f" ] && . "$f"
+#	done
+#	unset f
+#fi
+
+## Keyboard
+
+setxkbmap -model dell -layout us -variant altgr-intl
+
+## Display
+
+DISPLAY_NAME=eDP-1
+DISPLAY_MODE=1920x1080
+DISPLAY_RATE=60
+DISPLAY_DPI=96
+
+case $GRAPHICS_OFFLOAD in
+	PRIME)
+		DISPLAY_NAME=eDP-1-1
+		xrandr --setprovideroutputsource modesetting NVIDIA-0
+		;;
+	*)
+		;;
+esac
+
+xrandr --output "$DISPLAY_NAME" --mode "$DISPLAY_MODE" --rate "$DISPLAY_RATE" --primary
+xrandr --dpi "$DISPLAY_DPI"
+
+dunst &
+
+exec dwm
+
