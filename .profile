@@ -27,5 +27,3 @@ export EDITOR="vim"
 export ENV="$HOME/.config/shell/shinit"
 export LESSHISTFILE="-"
 
-[ -r "$ENV" ] && . "$ENV"
-
