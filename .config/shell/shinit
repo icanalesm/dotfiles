@@ -2,7 +2,7 @@
 
 ## Load the corresponding configuration files for some shells
 if [ -n "$BASH" ]; then
-	script="$HOME/.config/bash/bashrc"
+	script="$HOME/.config/shell/bashrc"
 	[ -f "$script" ] && [ -r "$script" ] && . "$script"
 	unset script
 	return

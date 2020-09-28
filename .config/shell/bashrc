@@ -4,7 +4,7 @@ script="$HOME/.config/shell/shinit.d/aliases"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
 script="$HOME/.config/shell/shinit.d/colours"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
-script="$HOME/.config/bash/bashrc.d/prompt"
+script="$HOME/.config/shell/bashrc.d/prompt"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
 
 unset script
