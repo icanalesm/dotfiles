@@ -1,16 +1,16 @@
 #!/bin/sh
 
-# Load the corresponding configuration files if using particular shells
+## Load the corresponding configuration files for some shells
 if [ -n "$BASH" ]; then
-	[ -r "$HOME/.config/bash/bashrc" ] && . "$HOME/.config/bash/bashrc"
+	script="$HOME/.config/bash/bashrc"
+	[ -f "$script" ] && [ -r "$script" ] && . "$script"
+	unset script
 	return
 fi
 
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
-
-for script in $HOME/.config/shell/shinit.d/*; do
-	[ -r "$script" ] && . "$script"
+## General shell configuration
+for script in "$HOME"/.config/shell/shinit.d/*; do
+	[ -f "$script" ] && [ -r "$script" ] && . "$script"
 done
 unset script
 
