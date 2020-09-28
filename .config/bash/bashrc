@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # If not running interactively, don't do anything
-case $- in
-*i*) return ;;
-esac
+[ -z "$PS1" ] && return
 
 script="$HOME/.config/shell/shinit.d/aliases"
 [ -r "$script" ] && . "$script"

@@ -7,9 +7,7 @@ if [ -n "$BASH" ]; then
 fi
 
 # If not running interactively, don't do anything
-case $- in
-*i*) return ;;
-esac
+[ -z "$PS1" ] && return
 
 for script in $HOME/.config/shell/shinit.d/*; do
 	[ -r "$script" ] && . "$script"
