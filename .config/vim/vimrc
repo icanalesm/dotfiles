@@ -2,6 +2,10 @@
 source ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect('~/.vim/bundle/{}')
 
+set viminfo='50,<50,s50,/0,:0,h,n~/.vim/viminfo
+
+set path+=**
+
 set nocompatible
 
 filetype plugin on
@@ -12,7 +16,21 @@ set backspace=indent,eol,start
 
 set incsearch
 
-set viminfo='50,<50,s50,/0,:0,h,n~/.config/vim/viminfo
+set wildmenu
+
+set number
+set relativenumber
+set cursorline
+
+set laststatus=2
+set ruler
+
+set splitbelow splitright
+" Split navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Plugin: Base16 Vim
 "         (https://github.com/chriskempson/base16-vim)
@@ -23,28 +41,8 @@ if !empty($BASE16_THEME)
 	colorscheme $BASE16_THEME
 endif
 
-" Always show status line
-set laststatus=2
-
-" Show the cursor position
-set ruler
-
-set number
-set relativenumber
-
-" Highlight current line
-set cursorline
-" Format current line number
-" (must be after colorscheme because base16-vim resets the syntax)
+" Must be after colorscheme because base16-vim resets the syntax
 hi CursorLineNr cterm=bold
-
-" Open splits at the bottom and right
-set splitbelow splitright
-" Split navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 
 " Plugin: vimtex
 "         (https://github.com/lervag/vimtex)
