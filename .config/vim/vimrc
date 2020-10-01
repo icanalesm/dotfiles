@@ -43,6 +43,14 @@ if !empty($BASE16_THEME)
 	hi CursorLineNr cterm=bold
 endif
 
+" Plugin: UltiSnips
+"         (https://github.com/SirVer/ultisnips)
+"
+let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
 " Plugin: vimtex
 "         (https://github.com/lervag/vimtex)
 "
