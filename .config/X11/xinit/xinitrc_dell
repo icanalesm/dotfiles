@@ -31,6 +31,9 @@ case $GRAPHICS_OFFLOAD in
 		DISPLAY_NAME=eDP-1-1
 		xrandr --setprovideroutputsource modesetting NVIDIA-0
 		;;
+	PRIMEREV)
+		xrandr --setprovideroutputsource NVIDIA-0 modesetting
+		;;
 	*)
 		;;
 esac
