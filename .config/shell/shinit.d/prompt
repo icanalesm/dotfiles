@@ -31,7 +31,7 @@ else
 	host_sty="$magenta";
 fi;
 
-PS1_fmt="$user_sty$USER$reset$gray@$host_sty$(hostname -s)$reset$gray:$green%s$reset %s "
+PS1_fmt="$user_sty$USER$reset$gray@$host_sty$(uname -n)$reset$gray:$green%s$reset %s "
 
 prompt()
 {
