@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [ $# -eq 0 ]; then
-	activeWin="root"
-else
-	activeWinLine=$(xprop -root | grep "_NET_ACTIVE_WINDOW(WINDOW)")
-	activeWin=${activeWinLine:40}
-fi
-import -window ${activeWin} ${HOME}/Screenshot_$(date +%Y%m%d_%H%M%S).png
