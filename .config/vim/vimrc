@@ -57,3 +57,4 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " Change default .tex file type from 'plaintex' to 'tex'
 " (see https://github.com/lervag/vimtex/wiki/introduction#comment-on-internal-tex-plugin)
 let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
