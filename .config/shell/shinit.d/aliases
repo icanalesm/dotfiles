@@ -1,6 +1,6 @@
 #!/bin/sh
 
-alias dotf='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias dotf='git --git-dir=$HOME/.dotf/ --work-tree=$HOME'
 
 if ls --color > /dev/null 2>&1; then
 	alias ls="ls --color=auto"
