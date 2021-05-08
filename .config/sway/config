@@ -1,4 +1,6 @@
-### Variables
+################################################################################
+# Variables
+################################################################################
 
 set $font_ui "sans 10"
 
@@ -24,25 +26,29 @@ set $ws3 3: 
 set $ws4 4: 
 set $ws5 5: 
 
-### Configuration
+################################################################################
+# Configuration
+################################################################################
 
 xwayland disable
 
-default_border pixel
-
-### Autostart
+################################################################################
+# Autostart
+################################################################################
 
 exec --no-startup-id dunst
 exec --no-startup-id pipewire
 exec --no-startup-id pipewire-media-session
 exec --no-startup-id pipewire-pulse
-exec --no-startup-id gammastep -c .config/gammastep/gammastep.conf
+exec --no-startup-id gammastep -c $HOME/.config/gammastep/gammastep.conf
 
-### Key bindings
+exec_always $HOME/.local/bin/gtk-settings-wayland
 
-#
-# Basics:
-#
+################################################################################
+# Key bindings
+################################################################################
+
+### Basics:
 
 # Reload the configuration file
 bindsym $mod+Shift+r reload
@@ -63,9 +69,7 @@ bindsym $mod+Shift+Return exec $term
 # with right mouse button + $mod.
 floating_modifier $mod normal
 
-#
-# Moving:
-#
+### Moving:
 
 # Move focus around
 bindsym $mod+$left focus left
@@ -87,9 +91,7 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-#
-# Workspaces:
-#
+### Workspaces:
 
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -105,9 +107,7 @@ bindsym $mod+Shift+3 move container to workspace $ws3
 bindsym $mod+Shift+4 move container to workspace $ws4
 bindsym $mod+Shift+5 move container to workspace $ws5
 
-#
-# Layout:
-#
+### Layout:
 
 # "Split" the current object of focus with $mod+b or $mod+v, for horizontal and
 # vertical splits respectively.
@@ -131,9 +131,7 @@ bindsym $mod+f fullscreen
 # Move focus to the parent container
 bindsym $mod+a focus parent
 
-#
-# Special keys:
-#
+### Special keys:
 
 bindsym XF86AudioLowerVolume exec uictl volume down
 bindsym XF86AudioRaiseVolume exec uictl volume up
@@ -144,9 +142,7 @@ bindsym XF86KbdBrightnessUp exec uictl kbdbright up
 bindsym XF86MonBrightnessDown exec uictl monbright down
 bindsym XF86MonBrightnessUp exec uictl monbright up
 
-#
-# Scratchpad:
-#
+### Scratchpad:
 
 # Move the currently focused window to the scratchpad
 #bindsym $mod+Shift+minus move scratchpad
@@ -155,9 +151,7 @@ bindsym XF86MonBrightnessUp exec uictl monbright up
 # If there are multiple scratchpad windows, this command cycles through them.
 #bindsym $mod+minus scratchpad show
 
-#
-# Resizing containers:
-#
+### Resizing containers:
 
 mode "resize" {
     bindsym $left resize shrink width 10px
@@ -174,10 +168,21 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Bar:
-# Read `man 5 sway-bar`.
-#
+################################################################################
+# UI
+################################################################################
+
+default_border pixel
+
+font $font_ui
+
+client.focused $clr_selbo $clr_selbg $clr_selfg $clr_selbo $clr_selbo
+client.unfocused $clr_norbo $clr_norbg $clr_norfg $clr_norbo $clr_norbo
+
+smart_borders on
+
+### Bar:
+### Read `man 5 sway-bar`.
 
 bar {
     position top
@@ -188,28 +193,31 @@ bar {
     colors {
         background $clr_norbg
         statusline $clr_norfg
-        focused_workspace $clr_selbo $clr_selbg $clr_selfg
+        focused_workspace $clr_selbg $clr_selbg $clr_selfg
         inactive_workspace $clr_norbg $clr_norbg $clr_norfg
         urgent_workspace $clr_norfg $clr_norfg $clr_norbg
     }
 }
 
-### Output configuration
+################################################################################
+# Output configuration
+################################################################################
 
-#
 # Get the names of the outputs: swaymsg -t get_outputs
 # Read `man 5 sway-output`.
-#
+
 output * bg #000000 solid_color
 
-### Input configuration
+################################################################################
+# Input configuration
+################################################################################
 
-#
 # Get the names of the inputs: swaymsg -t get_inputs
 # Read `man 5 sway-input`.
-#
+
 input type:keyboard {
-    xkb_layout "es"
+    xkb_layout es
+    xkb_model apple_laptop
 }
 input type:touchpad {
     dwt enabled

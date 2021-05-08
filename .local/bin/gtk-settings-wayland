@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# When GTK uses the wayland backend, some variables are taken from the
+# gsettings schema org.gnome.desktop.interface. See
+# https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
+
+config="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-3.0/settings.ini"
+if [ -f "$config" ]; then
+	schema="org.gnome.desktop.interface"
+	# Font
+	value="$(grep '^gtk-font-name' "$config" | cut -d'=' -f2)"
+	gsettings set "$schema" font-name "$value"
+fi
