@@ -1,1 +1,1 @@
-.config/X11/xinit/xinitrc
+.config/X11/xinitrc
