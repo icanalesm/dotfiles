@@ -2,15 +2,17 @@
 
 ## Load the corresponding configuration files for some shells
 if [ -n "$BASH" ]; then
-	script="$HOME/.config/shell/bashrc"
+	script="$HOME/.config/bash/bashrc"
 	[ -f "$script" ] && [ -r "$script" ] && . "$script"
 	unset script
 	return
 fi
 
 ## General shell configuration
-for script in "$HOME"/.config/shell/shinit.d/*; do
-	[ -f "$script" ] && [ -r "$script" ] && . "$script"
-done
+script="$HOME/.config/shell/aliases"
+[ -f "$script" ] && [ -r "$script" ] && . "$script"
+script="$HOME/.config/shell/colours"
+[ -f "$script" ] && [ -r "$script" ] && . "$script"
+script="$HOME/.config/shell/prompt"
+[ -f "$script" ] && [ -r "$script" ] && . "$script"
 unset script
-

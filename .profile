@@ -1,11 +1,7 @@
 #!/bin/sh
 
-# PATH
+## PATH
 export PATH="$HOME/.local/bin:$PATH"
-# SSH_AUTH_SOCK, SSH_AGENT_PID
-file="$HOME/.ssh/agent"
-! pgrep -u "$USER" ssh-agent > /dev/null && { ssh-agent > "$file"; chmod 600 "$file"; }
-[ -z "$SSH_AUTH_SOCK" ] && . "$file" > /dev/null
 
 ## Default programs
 export PAGER="less"
@@ -13,7 +9,13 @@ export EDITOR="vim"
 
 ## Configuration
 export ENV="$HOME/.config/shell/shinit"
+export HISTFILE="$HOME/.cache/bash/bash_history"
 export LESSHISTFILE="-"
+
+# SSH_AUTH_SOCK, SSH_AGENT_PID
+script="$HOME/.ssh/agent"
+! pgrep -u "$USER" ssh-agent > /dev/null && { ssh-agent > "$script"; chmod 600 "$script"; }
+[ -z "$SSH_AUTH_SOCK" ] && . "$script" > /dev/null
 
 ## Special configuration for some shells
 case $0 in
@@ -22,8 +24,12 @@ case $0 in
 	# it does not read ~/.bashrc after ~/.bash_profile, ~/.bash_login and
 	# ~/.profile
 	case $- in
-	*i*) [ -f "$HOME/.bashrc" ] && [ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc" ;;
+	*i*)
+		script="$HOME/.config/bash/bashrc"
+		[ -f "$script" ] && [ -r "$script" ] && . "$script"
+		;;
 	esac
 	;;
 esac
 
+unset script

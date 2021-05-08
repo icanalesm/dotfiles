@@ -9,10 +9,6 @@ fi
 
 # Colours for shell - Base16 Shell (https://github.com/chriskempson/base16-shell)
 export BASE16_THEME="base16-default-dark"
-BASE16_SHELL="$HOME/.config/shell/base16-shell"
-script="$BASE16_SHELL/scripts/$BASE16_THEME.sh"
-[ -r "$script" ] && . "$script"
-
-unset BASE16_SHELL
+script="$HOME/.config/shell/base16-shell/scripts/$BASE16_THEME.sh"
+[ -f "$script" ] && [ -r "$script" ] && . "$script"
 unset script
-

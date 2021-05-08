@@ -7,4 +7,3 @@ if ls --color > /dev/null 2>&1; then
 else
 	alias ls="ls -G"
 fi
-
