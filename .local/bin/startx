@@ -17,4 +17,5 @@ x11_conf_display()
 
 x11_conf_display "$GRAPHICS_OFFLOAD"
 
+[ -z "$DBUS_SESSION_BUS_ADDRESS" ] && exec dbus-launch --sh-syntax --exit-with-session /usr/bin/startx
 exec /usr/bin/startx
