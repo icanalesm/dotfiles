@@ -15,6 +15,6 @@ x11_conf_display()
 	fi
 }
 
-[ -n "$GRAPHICS_OFFLOAD" ] && x11_conf_display "$GRAPHICS_OFFLOAD"
+x11_conf_display "$GRAPHICS_OFFLOAD"
 
 exec /usr/bin/startx
