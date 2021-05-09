@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Text format
 bold="\033[1m"
@@ -31,18 +31,21 @@ else
 	host_sty="$magenta";
 fi;
 
-exitstatus()
+PS1_fmt="$user_sty$USER$reset$gray@$host_sty$(uname -n)$reset$gray:$green%s$reset %s "
+
+prompt()
 {
 	if [ $? -eq 0 ]; then
-		echo ":)"
+		stat=":)"
 	else
-		echo ":("
+		stat=":("
 	fi
+	printf "$PS1_fmt" "$(basename "$PWD")" "$stat"
 }
 
 # Set the terminal prompt
 # user@host:dir stat_last_cmd
-export PS1="\[$user_sty\]\u\[$reset$gray\]@\[$host_sty\]\h\[$reset$gray\]:\[$green\]\W\[$reset\] \$(exitstatus) "
+export PS1="\$(prompt)"
 
 unset bold
 unset reset
@@ -53,4 +56,3 @@ unset red
 unset magenta
 unset user_sty
 unset host_sty
-

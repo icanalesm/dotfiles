@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# PATH - Update for Macports
+## PATH - Update for Macports
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 ## Default programs
@@ -9,6 +9,7 @@ export EDITOR="vim"
 
 ## Configuration
 export ENV="$HOME/.config/shell/shinit"
+export HISTFILE="$HOME/.cache/bash/bash_history"
 export LESSHISTFILE="-"
 
 ## Special configuration for some shells
@@ -18,8 +19,12 @@ case $0 in
 	# it does not read ~/.bashrc after ~/.bash_profile, ~/.bash_login and
 	# ~/.profile
 	case $- in
-	*i*) [ -f "$HOME/.bashrc" ] && [ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc" ;;
+	*i*)
+		script="$HOME/.config/bash/bashrc"
+		[ -f "$script" ] && [ -r "$script" ] && . "$script"
+		;;
 	esac
 	;;
 esac
 
+unset script

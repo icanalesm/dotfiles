@@ -1,11 +1,9 @@
 #!/bin/sh
 
-script="$HOME/.config/shell/shinit.d/aliases"
+script="$HOME/.config/shell/aliases"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
-script="$HOME/.config/shell/shinit.d/colours"
+script="$HOME/.config/shell/colours"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
-script="$HOME/.config/shell/bashrc.d/prompt"
+script="$HOME/.config/bash/prompt"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
-
 unset script
-
