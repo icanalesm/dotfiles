@@ -8,6 +8,8 @@
 ehthumbs.db
 Thumbs.db
 
+.dotf
+
 # shell
 ##########
 .config/shell/base16-shell/
