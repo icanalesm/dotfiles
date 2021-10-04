@@ -32,7 +32,7 @@ case $GRAPHICS_OFFLOAD in
 		xrandr --setprovideroutputsource modesetting NVIDIA-0
 		;;
 	PRIMEREV)
-		xrandr --setprovideroutputsource NVIDIA-0 modesetting
+		xrandr --setprovideroutputsource NVIDIA-G0 modesetting
 		;;
 	*)
 		;;
