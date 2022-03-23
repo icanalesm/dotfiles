@@ -42,4 +42,10 @@ xrandr --dpi "$DISPLAY_DPI"
 
 dunst &
 
+if ! which systemctl >/dev/null; then
+	pipewire &
+	pipewire-pulse &
+	pipewire-media-session &
+fi
+
 exec dwm

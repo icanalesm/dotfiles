@@ -35,4 +35,10 @@ amixer -q -c 0 set 'IEC958',16 mute
 
 dunst &
 
+if ! which systemctl >/dev/null; then
+	pipewire &
+	pipewire-pulse &
+	pipewire-media-session &
+fi
+
 exec dwm
