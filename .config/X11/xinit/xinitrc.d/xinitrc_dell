@@ -16,7 +16,7 @@ fi
 
 ## Keyboard
 
-setxkbmap -model dell -layout us -variant altgr-intl
+setxkbmap -layout us,gb -model dell, -variant altgr-intl, -option grp:shifts_toggle
 
 ## Display
 
