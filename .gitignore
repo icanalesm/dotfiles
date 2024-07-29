@@ -8,7 +8,8 @@
 ehthumbs.db
 Thumbs.db
 
-.dotf
+# dotfiles repo
+.config/dotfiles
 
 # shell
 ##########
