@@ -1,9 +1,4 @@
 #!/bin/sh
 
 alias dotf='git --git-dir=$HOME/.config/dotfiles/ --work-tree=$HOME'
-
-if ls --color > /dev/null 2>&1; then
-	alias ls="ls --color=auto"
-else
-	alias ls="ls -G"
-fi
+alias ls="ls --color=auto"
