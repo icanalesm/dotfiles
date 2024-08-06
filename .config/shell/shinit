@@ -1,18 +1,17 @@
 #!/bin/sh
 
-## Load the corresponding configuration files for some shells
-if [ -n "$BASH" ]; then
-	script="$HOME/.config/bash/bashrc"
-	[ -f "$script" ] && [ -r "$script" ] && . "$script"
-	unset script
-	return
-fi
-
-## General shell configuration
 script="$HOME/.config/shell/aliases"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
+
 script="$HOME/.config/shell/colours"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
-script="$HOME/.config/shell/prompt"
+
+case $0 in
+*bash*)
+	script="$HOME/.config/bash/prompt" ;;
+*)
+	script="$HOME/.config/shell/prompt" ;;
+esac
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
+
 unset script

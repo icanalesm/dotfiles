@@ -1,6 +1,6 @@
 #!/bin/sh
 
-## PATH - Update for Macports
+## PATH
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 ## Default programs
