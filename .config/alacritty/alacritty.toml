@@ -1,0 +1,73 @@
+[shell]
+program = "/bin/sh"
+args = ["--login"]
+
+[font]
+size = 12
+
+[font.offset]
+y = 1
+
+[font.normal]
+family = "IBM Plex Mono"
+style = "Regular"
+
+[font.bold]
+family = "IBM Plex Mono"
+style = "Bold"
+
+[font.italic]
+family = "IBM Plex Mono"
+style = "Italic"
+
+[font.bold_italic]
+family = "IBM Plex Mono"
+style = "Bold Italic"
+
+# Mappings for macOS + spanish ISO keyboard
+# (see https://github.com/alacritty/alacritty/wiki/Keyboard-mappings)
+
+[[keyboard.bindings]]
+chars = '\'
+key = 10
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "|"
+key = 18
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "@"
+key = "Key2"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "#"
+key = "Key3"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "¬"
+key = "Key6"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "{"
+key = 39
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "}"
+key = 42
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "["
+key = 33
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "]"
+key = 30
+mods = "Alt"
