@@ -1,20 +1,20 @@
 #!/bin/sh
 
-x11_conf_display()
+conf_nvidia_offload()
 {
-	CONF_DISPLAY="$HOME/.config/X11/xorg.conf.d/20-display.conf"
+	CONF="$HOME/.config/X11/xorg.conf.d/20-nvidia-offload.conf"
 	case $1 in
-		PRIME)    CONF_OFFLOAD="$HOME/.config/X11/xorg.conf.d/display-nvidia-prime.conf" ;;
-		PRIMEREV) CONF_OFFLOAD="$HOME/.config/X11/xorg.conf.d/display-nvidia-primerev.conf" ;;
-		*)        CONF_OFFLOAD="/dev/null" ;;
+		PRIME)        CONF_OFFLOAD="$HOME/.config/X11/xorg.conf.d/nvidia-offload-prime.conf" ;;
+		REVERSEPRIME) CONF_OFFLOAD="$HOME/.config/X11/xorg.conf.d/nvidia-offload-reverseprime.conf" ;;
+		*)            CONF_OFFLOAD="/dev/null" ;;
 	esac
 
-	if [ "$(stat -L -c "%d:%i" "$CONF_DISPLAY")" != "$(stat -c "%d:%i" "$CONF_OFFLOAD")" ]; then
+	if [ "$(stat -L -c "%d:%i" "$CONF")" != "$(stat -c "%d:%i" "$CONF_OFFLOAD")" ]; then
 		[ "$CONF_OFFLOAD" != "/dev/null" ] && CONF_OFFLOAD=$(basename "$CONF_OFFLOAD")
-		ln -sf "$CONF_OFFLOAD" "$CONF_DISPLAY"
+		ln -sf "$CONF_OFFLOAD" "$CONF"
 	fi
 }
 
-x11_conf_display "$GRAPHICS_OFFLOAD"
+conf_nvidia_offload "$NVIDIA_OFFLOAD"
 
 exec /usr/bin/startx
