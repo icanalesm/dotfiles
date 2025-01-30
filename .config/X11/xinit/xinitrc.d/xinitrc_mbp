@@ -16,7 +16,7 @@ fi
 
 ## Keyboard
 
-setxkbmap -layout es,gb -model apple_laptop, -variant mac, -option grp:shifts_toggle
+setxkbmap -layout es,gb -model apple_laptop, -option grp:shifts_toggle
 
 ## Display
 
