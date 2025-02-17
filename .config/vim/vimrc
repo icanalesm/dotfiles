@@ -1,8 +1,8 @@
 set nocompatible
 
 " Pathogen
-source ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect('~/.vim/bundle/{}')
+source ~/.config/vim/bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect('~/.config/vim/bundle/{}')
 
 set viminfo='50,<50,s50,/0,:0,h,n~/.vim/viminfo
 
