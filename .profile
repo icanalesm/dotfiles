@@ -8,21 +8,19 @@ export PAGER="less"
 export EDITOR="vim"
 
 ## Configuration
-export ENV="$HOME/.config/shell/shinit"
-
-export HISTFILE="$HOME/.local/state/bash/history"
-
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export ENV="$XDG_CONFIG_HOME/shell/shinit"
+export XINITRC="$XDG_CONFIG_HOME/X11/xinit/xinitrc"
+export XSERVERRC="$XDG_CONFIG_HOME/X11/xinit/xserverrc"
+export HISTFILE="$XDG_STATE_HOME/bash/history"
 export LESSHISTFILE="-"
-
-export XINITRC="$HOME/.config/X11/xinit/xinitrc"
-export XSERVERRC="$HOME/.config/X11/xinit/xserverrc"
-
-export CARGO_HOME="$HOME/.local/share/cargo"
-export RUSTUP_HOME="$HOME/.local/share/rustup"
-
-export DOT_SAGE="$HOME/.config/sage"
-
-export CUDA_CACHE_PATH="$HOME/.cache/nv"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export DOT_SAGE="$XDG_CONFIG_HOME/sage"
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 
 # SSH_AUTH_SOCK, SSH_AGENT_PID
 script="$HOME/.ssh/agent"
