@@ -3,8 +3,8 @@
 # Colours for ls
 export LS_COLORS="di=34:ln=35:so=31:pi=33:ex=32:bd=30;46:cd=0;45:su=33;42:sg=33;42:tw=31;44:ow=0;44"
 
-# Colours for shell - Tinted Shell (https://github.com/tinted-theming/tinted-shell)
+# Colours for shell - base16-shell (https://github.com/chriskempson/base16-shell)
 export COLOR_THEME="base16-default-dark"
-script="$HOME/.config/shell/tinted-shell/scripts/$COLOR_THEME.sh"
+script="$HOME/.config/shell/base16-shell/scripts/$COLOR_THEME.sh"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
 unset script
