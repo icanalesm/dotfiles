@@ -32,7 +32,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Plugin: Base16 Vim
+" Plugin: base16-vim
 "         (https://github.com/chriskempson/base16-vim)
 "
 if !empty($COLOR_THEME)
