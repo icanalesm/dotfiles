@@ -8,16 +8,21 @@ export PAGER="less"
 export EDITOR="vim"
 
 ## Configuration
-export ENV="$HOME/.config/shell/shinit"
-export HISTFILE="$HOME/.cache/bash/bash_history"
-export LESSHISTFILE="-"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export ENV="$XDG_CONFIG_HOME/shell/shinit"
+export HISTFILE="$XDG_STATE_HOME/history"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export DOT_SAGE="$XDG_CONFIG_HOME/sage"
 
-## Special configuration for some shells
+## Configuration for different shells
 case $0 in
 *bash*)
-	# When bash is invoked with the name bash as an interactive login shell,
-	# it does not read ~/.bashrc after ~/.bash_profile, ~/.bash_login and
-	# ~/.profile
+	# Read bashrc when bash is invoked as an interactive login shell with
+	# the name bash
 	case $- in
 	*i*)
 		script="$HOME/.config/bash/bashrc"

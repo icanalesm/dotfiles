@@ -9,7 +9,6 @@ ehthumbs.db
 Thumbs.db
 
 # dotfiles repo
-##########
 .config/dotfiles
 
 # shell
