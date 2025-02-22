@@ -4,7 +4,7 @@ set nocompatible
 source ~/.config/vim/bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect('~/.config/vim/bundle/{}')
 
-set viminfo='50,<50,s50,/0,:0,h,n~/.vim/viminfo
+set viminfo='50,<50,s50,/0,:0,h,n~/.config/vim/viminfo
 
 set path+=**
 
