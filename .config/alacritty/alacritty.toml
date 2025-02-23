@@ -1,5 +1,5 @@
-[shell]
-program = "/bin/sh"
+[terminal.shell]
+program = "/opt/local/bin/bash"
 args = ["--login"]
 
 [font]
