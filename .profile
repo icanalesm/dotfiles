@@ -21,11 +21,6 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export DOT_SAGE="$XDG_CONFIG_HOME/sage"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 
-# SSH_AUTH_SOCK, SSH_AGENT_PID
-script="$HOME/.ssh/agent"
-! pgrep -u "$USER" ssh-agent > /dev/null && { ssh-agent > "$script"; chmod 600 "$script"; }
-[ -z "$SSH_AUTH_SOCK" ] && . "$script" > /dev/null
-
 ## Configuration for different shells
 case $0 in
 *bash*)
