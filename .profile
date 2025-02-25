@@ -30,9 +30,8 @@ case $0 in
 	*i*)
 		script="$HOME/.config/bash/bashrc"
 		[ -f "$script" ] && [ -r "$script" ] && . "$script"
+		unset script
 		;;
 	esac
 	;;
 esac
-
-unset script
