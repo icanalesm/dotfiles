@@ -3,10 +3,10 @@ program = "/opt/local/bin/bash"
 args = ["--login"]
 
 [font]
-size = 12
+size = 13
 
 [font.offset]
-y = 1
+y = 0
 
 [font.normal]
 family = "IBM Plex Mono"
