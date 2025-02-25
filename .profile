@@ -12,8 +12,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
-export ENV="$XDG_CONFIG_HOME/shell/shinit"
 export HISTFILE="$XDG_STATE_HOME/history"
+export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export DOT_SAGE="$XDG_CONFIG_HOME/sage"
@@ -27,9 +27,8 @@ case $0 in
 	*i*)
 		script="$HOME/.config/bash/bashrc"
 		[ -f "$script" ] && [ -r "$script" ] && . "$script"
+		unset script
 		;;
 	esac
 	;;
 esac
-
-unset script
