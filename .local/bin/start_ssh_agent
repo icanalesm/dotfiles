@@ -1,6 +1,0 @@
-#!/bin/sh
-
-## SSH agent (SSH_AUTH_SOCK, SSH_AGENT_PID)
-script="$XDG_RUNTIME_DIR/ssh-agent.env"
-! pgrep -u "$USER" ssh-agent > /dev/null && ssh-agent > "$script"
-[ ! -f "$SSH_AUTH_SOCK" ] && . "$script" > /dev/null

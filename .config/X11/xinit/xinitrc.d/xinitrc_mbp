@@ -26,9 +26,13 @@ xcalib "$HOME/.config/color/icc/ColorLCD-CB5A19E1-6C20-C98E-BB2D-70FC3BB550B4.ic
 ## Make sure the optical audio is off
 amixer -q -c 0 set 'IEC958',16 mute
 
-## Various programs
+## SSH agent (SSH_AUTH_SOCK, SSH_AGENT_PID)
 
-. "$HOME/.local/bin/start_ssh_agent"
+script="$XDG_RUNTIME_DIR/ssh-agent.env"
+! pgrep -u "$USER" ssh-agent > /dev/null && ssh-agent > "$script"
+[ ! -f "$SSH_AUTH_SOCK" ] && . "$script" > /dev/null
+
+## Various programs
 
 dunst &
 

@@ -33,9 +33,13 @@ esac
 
 xrandr --dpi "$DISPLAY_DPI" --output "$DISPLAY_NAME" --primary --auto
 
-## Various programs
+## SSH agent (SSH_AUTH_SOCK, SSH_AGENT_PID)
 
-. "$HOME/.local/bin/start_ssh_agent"
+script="$XDG_RUNTIME_DIR/ssh-agent.env"
+! pgrep -u "$USER" ssh-agent > /dev/null && ssh-agent > "$script"
+[ ! -f "$SSH_AUTH_SOCK" ] && . "$script" > /dev/null
+
+## Various programs
 
 dunst &
 
