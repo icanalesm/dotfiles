@@ -28,7 +28,7 @@ amixer -q -c 0 set 'IEC958',16 mute
 
 ## Various programs
 
-"$HOME/.local/bin/start_ssh_agent"
+. "$HOME/.local/bin/start_ssh_agent"
 
 dunst &
 

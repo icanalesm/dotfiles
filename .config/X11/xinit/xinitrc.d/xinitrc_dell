@@ -35,7 +35,7 @@ xrandr --dpi "$DISPLAY_DPI" --output "$DISPLAY_NAME" --primary --auto
 
 ## Various programs
 
-"$HOME/.local/bin/start_ssh_agent"
+. "$HOME/.local/bin/start_ssh_agent"
 
 dunst &
 
