@@ -4,19 +4,23 @@ set nocompatible
 source ~/.config/vim/bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect('~/.config/vim/bundle/{}')
 
-set viminfo='50,<50,s50,/0,:0,h,n~/.config/vim/viminfo
-
-set path+=**
+set viminfo+=n~/.config/vim/viminfo
 
 filetype plugin on
-
-syntax on
 
 set backspace=indent,eol,start
 
 set incsearch
 
 set wildmenu
+
+set splitbelow splitright
+
+"-------------------------------------------------------------------------------
+" Visual settings
+"-------------------------------------------------------------------------------
+
+syntax on
 
 set number
 set relativenumber
@@ -25,35 +29,95 @@ set cursorline
 set laststatus=2
 set ruler
 
-set splitbelow splitright
+"-------------------------------------------------------------------------------
+" Mappings
+"-------------------------------------------------------------------------------
+
+let mapleader="\<space>"
+
 " Split navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+"-------------------------------------------------------------------------------
 " Plugin: base16-vim
 "         (https://github.com/chriskempson/base16-vim)
-"
+"-------------------------------------------------------------------------------
+
 if !empty($COLOR_THEME)
-"       (see https://github.com/chriskempson/base16-vim#256-colorspace)
-        let base16colorspace=256
-        colorscheme $COLOR_THEME
-"       base16-vim resets the syntax
-        hi CursorLineNr cterm=bold
+"   (see https://github.com/chriskempson/base16-vim#256-colorspace)
+    let base16colorspace=256
+    colorscheme $COLOR_THEME
+"   base16-vim resets the syntax
+    hi CursorLineNr cterm=bold
 endif
 
-" Plugin: UltiSnips
-"         (https://github.com/SirVer/ultisnips)
-"
-let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"-------------------------------------------------------------------------------
+" Plugin: lsp
+"         (https://github.com/yegappan/lsp)
+"-------------------------------------------------------------------------------
 
+let lspOptions = #{
+    \ autoHighlight: v:true,
+    \ diagSignErrorText: 'E',
+    \ diagSignHintText: 'H',
+    \ diagSignInfoText: 'I',
+    \ diagSignWarningText: 'W',
+    \ noNewlineInCompletion: v:true,
+    \ outlineOnRight: v:true,
+    \ outlineWinSize: 70,
+    \ showDiagOnStatusLine: v:true,
+\ }
+autocmd User LspSetup call LspOptionsSet(lspOptions)
+
+let lspServers = [
+    \ #{
+        \ name: 'clangd',
+        \ filetype: ['c', 'cpp'],
+        \ path: 'clangd',
+        \ args: ['--background-index']
+    \ },
+    \ #{
+        \ name: 'rustanalyzer',
+        \ filetype: ['rust'],
+        \ path: 'rust-analyzer',
+        \ args: [],
+        \ syncInit: v:true
+    \ },
+\ ]
+autocmd User LspSetup call LspAddServer(lspServers)
+
+" Highlight customisation
+highlight LspDiagInlineError ctermbg=red ctermfg=black
+highlight LspDiagInlineWarning ctermfg=lightyellow cterm=underline
+highlight LspDiagInlineHint cterm=underline
+highlight LspDiagSignErrorText ctermbg=red ctermfg=black
+highlight LspDiagSignWarningText ctermbg=lightyellow ctermfg=black
+highlight LspDiagSignHintText ctermbg=blue ctermfg=black
+highlight link LspInlayHintsParam LineNr
+highlight link LspInlayHintsType LineNr
+
+" Enable auto selection of the fist autocomplete item
+augroup LspSetup
+    au!
+    au User LspAttached set completeopt-=noselect
+augroup END
+
+" Mappings for most-used functions
+nnoremap <leader>o :LspDocumentSymbol<CR>
+nnoremap <leader>D :LspGotoDefinition<CR>
+nnoremap <leader>i :LspHover<CR>
+nnoremap <leader>h :LspInlayHints toggle<CR>
+nnoremap <leader>d :LspPeekDefinition<CR>
+nnoremap <leader>r :LspPeekReferences<CR>
+nnoremap <leader>R :LspRename<CR>
+
+"-------------------------------------------------------------------------------
 " Plugin: vimtex
 "         (https://github.com/lervag/vimtex)
-"
+"-------------------------------------------------------------------------------
 " Change default .tex file type from 'plaintex' to 'tex'
 " (see https://github.com/lervag/vimtex/wiki/introduction#comment-on-internal-tex-plugin)
 let g:tex_flavor='latex'
