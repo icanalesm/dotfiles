@@ -19,13 +19,10 @@ DISPLAY_MODE=1920x1080
 DISPLAY_RATE=60
 DISPLAY_DPI=96
 
-case $NVIDIA_OFFLOAD in
-	PRIME)
+case $GRAPHICS_CARD in
+	discrete)
 		DISPLAY_NAME=eDP-1-1
 		xrandr --setprovideroutputsource modesetting NVIDIA-0
-		;;
-	REVERSEPRIME)
-		xrandr --setprovideroutputsource NVIDIA-G0 modesetting
 		;;
 	*)
 		;;

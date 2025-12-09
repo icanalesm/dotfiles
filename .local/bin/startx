@@ -1,20 +1,18 @@
 #!/bin/sh
 
-conf_nvidia_offload()
+conf_graphics_card()
 {
-	CONF="$HOME/.config/X11/xorg.conf.d/20-nvidia-offload.conf"
+	CONF_FILE_X="/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf"
 	case $1 in
-		PRIME)        CONF_OFFLOAD="$HOME/.config/X11/xorg.conf.d/nvidia-offload-prime.conf" ;;
-		REVERSEPRIME) CONF_OFFLOAD="$HOME/.config/X11/xorg.conf.d/nvidia-offload-reverseprime.conf" ;;
-		*)            CONF_OFFLOAD="/dev/null" ;;
+		discrete) CONF_FILE="$HOME/.config/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf" ;;
+		*)        CONF_FILE="/dev/null" ;;
 	esac
-
-	if [ "$(stat -L -c "%d:%i" "$CONF")" != "$(stat -c "%d:%i" "$CONF_OFFLOAD")" ]; then
-		[ "$CONF_OFFLOAD" != "/dev/null" ] && CONF_OFFLOAD=$(basename "$CONF_OFFLOAD")
-		ln -sf "$CONF_OFFLOAD" "$CONF"
+	if [ "$(stat -L -c "%d:%i" "$CONF_FILE_X")" != "$(stat -c "%d:%i" "$CONF_FILE")" ]; then
+		sudo ln -sf "$CONF_FILE" "$CONF_FILE_X"
 	fi
 }
 
-conf_nvidia_offload "$NVIDIA_OFFLOAD"
+conf_graphics_card "$GRAPHICS_CARD"
 
-exec /usr/bin/startx
+exec /usr/bin/startx -- -verbose 6 -logverbose 6 1> /tmp/Xout.log 2> /tmp/Xerr.log
+
