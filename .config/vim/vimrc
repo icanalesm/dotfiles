@@ -80,11 +80,11 @@ let lspServers = [
         \ args: ['--background-index']
     \ },
     \ #{
-        \ name: 'rustanalyzer',
+        \ name: 'rust-analyzer',
         \ filetype: ['rust'],
         \ path: 'rust-analyzer',
         \ args: [],
-        \ syncInit: v:true
+        \ syncInit: v:true,
     \ },
 \ ]
 autocmd User LspSetup call LspAddServer(lspServers)
@@ -98,6 +98,10 @@ highlight LspDiagSignWarningText ctermbg=lightyellow ctermfg=black
 highlight LspDiagSignHintText ctermbg=blue ctermfg=black
 highlight link LspInlayHintsParam LineNr
 highlight link LspInlayHintsType LineNr
+" Highlight customisation - Not documented
+highlight LspTextRef ctermbg=19
+highlight LspReadRef ctermbg=19
+highlight LspWriteRef ctermbg=19
 
 " Enable auto selection of the fist autocomplete item
 augroup LspSetup
@@ -107,12 +111,12 @@ augroup END
 
 " Mappings for most-used functions
 nnoremap <leader>o :LspDocumentSymbol<CR>
-nnoremap <leader>D :LspGotoDefinition<CR>
 nnoremap <leader>i :LspHover<CR>
+nnoremap <leader>d :LspGotoDefinition<CR>
+nnoremap <leader>D :LspPeekDefinition<CR>
 nnoremap <leader>h :LspInlayHints toggle<CR>
-nnoremap <leader>d :LspPeekDefinition<CR>
-nnoremap <leader>r :LspPeekReferences<CR>
-nnoremap <leader>R :LspRename<CR>
+nnoremap <leader>r :LspRename<CR>
+nnoremap <leader>R :LspPeekReferences<CR>
 
 "-------------------------------------------------------------------------------
 " Plugin: vimtex
