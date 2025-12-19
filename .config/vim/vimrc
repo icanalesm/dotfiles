@@ -92,9 +92,11 @@ autocmd User LspSetup call LspAddServer(lspServers)
 " Highlight customisation
 highlight LspDiagInlineError ctermbg=red ctermfg=black
 highlight LspDiagInlineWarning ctermfg=lightyellow cterm=underline
+highlight LspDiagInlineInfo ctermbg=blue ctermfg=black
 highlight LspDiagInlineHint cterm=underline
 highlight LspDiagSignErrorText ctermbg=red ctermfg=black
 highlight LspDiagSignWarningText ctermbg=lightyellow ctermfg=black
+highlight LspDiagSignInfoText ctermbg=blue ctermfg=black
 highlight LspDiagSignHintText ctermbg=blue ctermfg=black
 highlight link LspInlayHintsParam LineNr
 highlight link LspInlayHintsType LineNr
