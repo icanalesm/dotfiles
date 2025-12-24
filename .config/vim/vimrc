@@ -65,6 +65,7 @@ let lspOptions = #{
     \ noNewlineInCompletion: v:true,
     \ outlineOnRight: v:true,
     \ outlineWinSize: 70,
+    \ semanticHighlight: v:true,
     \ showDiagOnStatusLine: v:true,
 \ }
 autocmd User LspSetup call LspOptionsSet(lspOptions)
@@ -111,8 +112,8 @@ augroup END
 " Mappings for most-used functions
 nnoremap <leader>o :LspDocumentSymbol<CR>
 nnoremap <leader>i :LspHover<CR>
-nnoremap <leader>d :LspGotoDefinition<CR>
-nnoremap <leader>D :LspPeekDefinition<CR>
+nnoremap <leader>gd :LspGotoDefinition<CR>
+nnoremap <leader>pd :LspPeekDefinition<CR>
 nnoremap <leader>h :LspInlayHints toggle<CR>
 nnoremap <leader>r :LspRename<CR>
 nnoremap <leader>R :LspPeekReferences<CR>
