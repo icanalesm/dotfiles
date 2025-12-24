@@ -29,6 +29,9 @@ set cursorline
 set laststatus=2
 set ruler
 
+" My version of base16-default-dark (see colors/base16-default-dark.vim)
+colorscheme base16-default-dark
+
 "-------------------------------------------------------------------------------
 " Mappings
 "-------------------------------------------------------------------------------
@@ -40,16 +43,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-"-------------------------------------------------------------------------------
-" Plugin: tinted-vim
-"         (https://github.com/tinted-theming/tinted-vim)
-"         (Also see https://github.com/chriskempson/base16-vim)
-"-------------------------------------------------------------------------------
-if exists('$BASE16_THEME') && (!exists('g:colors_name') || g:colors_name != 'base16-$BASE16_THEME')
-    let tinted_colorspace=256
-    colorscheme base16-$BASE16_THEME
-endif
 
 "-------------------------------------------------------------------------------
 " Plugin: lsp
