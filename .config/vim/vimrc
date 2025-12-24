@@ -81,20 +81,20 @@ let lspServers = [
 autocmd User LspSetup call LspAddServer(lspServers)
 
 " Highlight customisation
-highlight LspDiagInlineError ctermbg=red ctermfg=black
-highlight LspDiagInlineWarning ctermfg=lightyellow cterm=underline
-highlight LspDiagInlineInfo ctermbg=blue ctermfg=black
-highlight LspDiagInlineHint cterm=underline
-highlight LspDiagSignErrorText ctermbg=red ctermfg=black
-highlight LspDiagSignWarningText ctermbg=lightyellow ctermfg=black
-highlight LspDiagSignInfoText ctermbg=blue ctermfg=black
-highlight LspDiagSignHintText ctermbg=blue ctermfg=black
-highlight link LspInlayHintsParam LineNr
-highlight link LspInlayHintsType LineNr
+hi LspDiagInlineError ctermfg=black ctermbg=red
+hi LspDiagInlineWarning ctermfg=black ctermbg=yellow
+hi LspDiagInlineInfo cterm=underline
+hi LspDiagInlineHint ctermfg=black ctermbg=cyan
+hi LspDiagSignErrorText ctermfg=black ctermbg=red
+hi LspDiagSignWarningText ctermfg=black ctermbg=yellow
+hi LspDiagSignInfoText ctermfg=black ctermbg=blue
+hi LspDiagSignHintText ctermfg=black ctermbg=cyan
+hi link LspInlayHintsParam LineNr
+hi link LspInlayHintsType LineNr
 " Highlight customisation - Not documented
-highlight LspTextRef ctermbg=19
-highlight LspReadRef ctermbg=19
-highlight LspWriteRef ctermbg=19
+hi LspTextRef ctermbg=19
+hi LspReadRef ctermbg=19
+hi LspWriteRef ctermbg=19
 
 " Enable auto selection of the fist autocomplete item
 augroup LspSetup
