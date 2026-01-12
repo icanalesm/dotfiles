@@ -2,4 +2,4 @@
 
 alias dotf='git --git-dir=$HOME/.config/dotfiles/ --work-tree=$HOME'
 alias ls='ls --color=auto'
-alias startx='startx -- -verbose 6 -logverbose 6 1> /tmp/Xout.log 2> /tmp/Xerr.log'
+alias startx-v='startx -- -verbose 6 -logverbose 6 1> /tmp/Xout.log 2> /tmp/Xerr.log'
