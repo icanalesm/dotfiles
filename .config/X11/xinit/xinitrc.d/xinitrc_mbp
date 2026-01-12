@@ -34,12 +34,14 @@ script="$XDG_RUNTIME_DIR/ssh-agent.env"
 
 ## Various programs
 
-dunst &
-
 if ! which systemctl >/dev/null; then
 	pipewire &
 	pipewire-pulse &
 	pipewire-media-session &
 fi
+
+dunst &
+
+dwmblocks &
 
 exec dwm

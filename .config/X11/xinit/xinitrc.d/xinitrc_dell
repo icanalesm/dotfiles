@@ -19,14 +19,10 @@ DISPLAY_MODE=1920x1080
 DISPLAY_RATE=60
 DISPLAY_DPI=96
 
-case $GRAPHICS_CARD in
-	discrete)
-		DISPLAY_NAME=eDP-1-1
-		xrandr --setprovideroutputsource modesetting NVIDIA-0
-		;;
-	*)
-		;;
-esac
+if [ -f /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf ]; then
+	DISPLAY_NAME=eDP-1-1
+	xrandr --setprovideroutputsource modesetting NVIDIA-0
+fi
 
 xrandr --dpi "$DISPLAY_DPI" --output "$DISPLAY_NAME" --primary --auto
 
@@ -38,12 +34,14 @@ script="$XDG_RUNTIME_DIR/ssh-agent.env"
 
 ## Various programs
 
-dunst &
-
 if ! which systemctl >/dev/null; then
 	pipewire &
 	pipewire-pulse &
 	pipewire-media-session &
 fi
+
+dunst &
+
+dwmblocks &
 
 exec dwm
