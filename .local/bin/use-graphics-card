@@ -1,0 +1,16 @@
+#!/bin/sh
+
+CONF_NVIDIA="/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf"
+
+case "$1" in
+    "" | integrated)
+        [ -f "$CONF_NVIDIA" ] && sudo rm "$CONF_NVIDIA"
+        ;;
+    nvidia)
+        file="$HOME/.config/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf"
+        [ ! -f "$CONF_NVIDIA" ] && sudo cp "$file" "$CONF_NVIDIA"
+        ;;
+    *)
+        exit 1
+        ;;
+esac
