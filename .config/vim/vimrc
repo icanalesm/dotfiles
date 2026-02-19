@@ -1,20 +1,32 @@
 set nocompatible
 
-" Pathogen
-source ~/.config/vim/bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect('~/.config/vim/bundle/{}')
-
 set viminfo+=n~/.config/vim/viminfo
 
-filetype plugin on
+filetype plugin indent on
+
+set autoindent
+set smartindent
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
 
 set backspace=indent,eol,start
 
+set ignorecase
+set smartcase
 set incsearch
+
+set scrolloff=4
+
+set splitbelow splitright
 
 set wildmenu
 
-set splitbelow splitright
+" Pathogen
+source ~/.config/vim/bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect('~/.config/vim/bundle/{}')
 
 "-------------------------------------------------------------------------------
 " Visual settings
@@ -25,6 +37,7 @@ syntax on
 set number
 set relativenumber
 set cursorline
+"set colorcolumn=80
 
 set laststatus=2
 set ruler
@@ -33,10 +46,13 @@ set ruler
 colorscheme base16-default-dark
 
 "-------------------------------------------------------------------------------
-" Mappings
+" Key mappings
 "-------------------------------------------------------------------------------
 
 let mapleader="\<space>"
+
+" Open netrw with <leader>cd
+nnoremap <leader>cd :Ex<CR>
 
 " Split navigation
 nnoremap <C-h> <C-w>h
@@ -108,7 +124,7 @@ augroup LspSetup
     au User LspAttached set completeopt-=noselect
 augroup END
 
-" Mappings for most-used functions
+" Key mappings for most-used functions
 nnoremap <leader>o :LspDocumentSymbol<CR>
 nnoremap <leader>i :LspHover<CR>
 nnoremap <leader>gd :LspGotoDefinition<CR>
