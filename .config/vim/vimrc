@@ -67,10 +67,10 @@ nnoremap <C-l> <C-w>l
 
 let lspOptions = #{
     \ autoHighlight: v:true,
-    \ diagSignErrorText: 'E',
-    \ diagSignHintText: 'H',
-    \ diagSignInfoText: 'I',
-    \ diagSignWarningText: 'W',
+    \ diagSignErrorText: '✘',
+    \ diagSignHintText: '⚑',
+    \ diagSignInfoText: '»',
+    \ diagSignWarningText: '▲',
     \ noNewlineInCompletion: v:true,
     \ outlineOnRight: v:true,
     \ outlineWinSize: 70,
@@ -107,10 +107,10 @@ hi LspDiagInlineError ctermfg=black ctermbg=red
 hi LspDiagInlineWarning ctermfg=black ctermbg=yellow
 hi LspDiagInlineInfo cterm=underline
 hi LspDiagInlineHint ctermfg=black ctermbg=cyan
-hi LspDiagSignErrorText ctermfg=black ctermbg=red
-hi LspDiagSignWarningText ctermfg=black ctermbg=yellow
-hi LspDiagSignInfoText ctermfg=black ctermbg=blue
-hi LspDiagSignHintText ctermfg=black ctermbg=cyan
+hi LspDiagSignErrorText ctermfg=red ctermbg=18
+hi LspDiagSignWarningText ctermfg=yellow ctermbg=18
+hi LspDiagSignInfoText ctermfg=blue ctermbg=18
+hi LspDiagSignHintText ctermfg=cyan ctermbg=18
 hi link LspInlayHintsParam LineNr
 hi link LspInlayHintsType LineNr
 " Highlight customisation - Not documented
