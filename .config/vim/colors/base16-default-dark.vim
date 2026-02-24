@@ -1,16 +1,17 @@
 " vi:syntax=vim
 
-" Scheme name: Default Dark
-" Scheme author: Chris Kempson (http://chriskempson.com)
-"
-" My base16-default-dark colour scheme for vim, based on base16-vim
+" My Base16 Default Dark colour theme for vim, based on base16-vim
 " (https://github.com/chriskempson/base16-vim) and tinted-vim
 " (https://github.com/tinted-theming/tinted-vim).
 "
-" It is assumed that a 256-colour terminal is configured with base16-shell
+" It is assumed that a 256-colour terminal is configured to use the
+" Base16 Default Dark shell theme (see base16-shell
 " (https://github.com/chriskempson/base16-shell) or tinted-shell
-" (https://github.com/tinted-theming/tinted-shell) to use the
-" base16-default-dark theme.
+" (https://github.com/tinted-theming/tinted-shell)).
+
+" Colour scheme: Base16 Default Dark
+"                (https://github.com/chriskempson/base16-default-schemes)
+" Colour scheme author: Chris Kempson
 
 " GUI colors
 let s:gui_00      = "181818"
