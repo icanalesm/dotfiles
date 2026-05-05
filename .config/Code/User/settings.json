@@ -1,0 +1,141 @@
+{
+    "python.defaultInterpreterPath": "/home/isaac/.local/share/miniconda3",
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "Dark Modern",
+    "workbench.colorCustomizations": {
+        "[Dark Modern]": {
+            "editor.background": "#181818",
+            "editor.foreground": "#D8D8D8",
+            "editorLineNumber.foreground": "#585858",
+            "editorLineNumber.activeForeground": "#B8B8B8",
+            "editor.lineHighlightBackground": "#282828",
+            "list.activeSelectionBackground": "#282828",
+            "list.inactiveSelectionBackground": "#282828",
+            "keybindingLabel.foreground": "#D8D8D8",
+            "quickInput.background": "#181818",
+            "quickInput.foreground": "#D8D8D8"
+        }
+    },
+    "editor.bracketPairColorization.enabled": false,
+    "editor.tokenColorCustomizations": {
+        "[Dark Modern]": {
+            // Comment
+            "comments": "#A1B56C",
+            // Constant
+            "strings": "#DC9656",
+            "numbers": "#DC9656",
+            // Identifier
+            "functions": "#D8D8D8",
+            "variables": "#D8D8D8",
+            // Keyword
+            "keywords": "#BA8BAF",
+            // Type
+            "types": "#7CAFC2",
+            "textMateRules": [
+                // Normal
+                // {
+                //     "scope": "meta.block",
+                //     "settings": {
+                //         "foreground": "#D8D8D8"
+                //     }
+                // },
+                {
+                    "name": "Comment",
+                    "scope": [
+                        "comment",
+                        "comment.block.documentation",
+                        // Doxygen
+                        "storage.type.class.doxygen"
+                    ],
+                    "settings": {
+                        "foreground": "#A1B56C",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "name": "Constant",
+                    "scope": [
+                        "constant.language",
+                        "keyword.other.unit"
+                    ],
+                    "settings": {
+                        "foreground": "#DC9656"
+                    }
+                },
+                {
+                    "name": "Identifier",
+                    "scope": [
+                        "entity.name.namespace",
+                        // "variable.other",
+                        "variable.other.enummember"
+                    ],
+                    "settings": {
+                        "foreground": "#D8D8D8"
+                    }
+                },
+                {
+                    "name": "Operator",
+                    "scope": [
+                        "keyword.operator",
+                        // C
+                        "keyword.operator.sizeof"
+                    ],
+                    "settings": {
+                        "foreground": "#D8D8D8"
+                    }
+                },
+                {
+                    "name": "Keyword",
+                    "scope": [
+                        "keyword",
+                        "keyword.operator.cast",
+                        "variable.language.this"
+                    ],
+                    "settings": {
+                        "foreground": "#BA8BAF"
+                    }
+                },
+                {
+                    "name": "Preproc",
+                    "scope": [
+                        "entity.name.function.preprocessor",
+                        "meta.preprocessor",
+                        // C/C++
+                        "entity.other.attribute-name.pragma.preprocessor"
+                    ],
+                    "settings": {
+                        "foreground": "#BA8BAF"
+                    }
+                },
+                {
+                    "name": "Type",
+                    "scope": [
+                        "storage.modifier",
+                        "storage.type",
+                        // C/C++
+                        "keyword.other.typedef"
+                    ],
+                    "settings": {
+                        "foreground": "#7CAFC2"
+                    }
+                },
+                {
+                    "name": "Special",
+                    "scope": [
+                        "constant.character.escape",
+                        "constant.other.placeholder"
+                    ],
+                    "settings": {
+                        "foreground": "#A16946"
+                    }
+                },
+            ]
+        }
+    },
+    "editor.semanticTokenColorCustomizations": {
+        "[Dark Modern]": {
+            "enabled": true,
+            "rules": {}
+        }
+    }
+}
