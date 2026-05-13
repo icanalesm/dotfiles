@@ -19,33 +19,36 @@
     "editor.bracketPairColorization.enabled": false,
     "editor.tokenColorCustomizations": {
         "[Dark Modern]": {
-            // Comment
             "comments": "#A1B56C",
-            // Constant
             "strings": "#DC9656",
             "numbers": "#DC9656",
-            // Identifier
-            "functions": "#D8D8D8",
             "variables": "#D8D8D8",
-            // Keyword
+            "functions": "#D8D8D8",
             "keywords": "#BA8BAF",
-            // Type
             "types": "#7CAFC2",
             "textMateRules": [
-                // Normal
-                // {
-                //     "scope": "meta.block",
-                //     "settings": {
-                //         "foreground": "#D8D8D8"
-                //     }
-                // },
+                {
+                    "name": "Normal",
+                    "scope": [
+                        //
+                        "entity.other.attribute.nodiscard"
+                    ],
+                    "settings": {
+                        "foreground": "#D8D8D8"
+                    }
+                },
                 {
                     "name": "Comment",
                     "scope": [
-                        "comment",
-                        "comment.block.documentation",
-                        // Doxygen
-                        "storage.type.class.doxygen"
+                        "comment.line",
+                        "comment.line.double-slash",
+                        "comment.line.double-dash",
+                        "comment.line.number-sign",
+                        "comment.line.percentage",
+                        "comment.block",
+                        "comment.block.documentation"
+                        //
+                        // "storage.type.class.doxygen"
                     ],
                     "settings": {
                         "foreground": "#A1B56C",
@@ -55,7 +58,18 @@
                 {
                     "name": "Constant",
                     "scope": [
+                        "constant.numeric",
+                        "constant.character",
                         "constant.language",
+                        "constant.other",
+                        "string.quoted.single",
+                        "string.quoted.double",
+                        "string.quoted.triple",
+                        "string.quoted.other",
+                        "string.unquoted",
+                        "string.interpolated",
+                        "string.regexp",
+                        //
                         "keyword.other.unit"
                     ],
                     "settings": {
@@ -65,8 +79,11 @@
                 {
                     "name": "Identifier",
                     "scope": [
-                        "entity.name.namespace",
-                        // "variable.other",
+                        "entity.name.function",
+                        "entity.name.section",
+                        "variable.parameter",
+                        //
+                        "keyword.other.operator.overload",
                         "variable.other.enummember"
                     ],
                     "settings": {
@@ -77,7 +94,7 @@
                     "name": "Operator",
                     "scope": [
                         "keyword.operator",
-                        // C
+                        //
                         "keyword.operator.sizeof"
                     ],
                     "settings": {
@@ -87,9 +104,12 @@
                 {
                     "name": "Keyword",
                     "scope": [
-                        "keyword",
+                        "keyword.control",
+                        "keyword.other",
+                        "variable.language",
+                        //
                         "keyword.operator.cast",
-                        "variable.language.this"
+                        "keyword.other.using"
                     ],
                     "settings": {
                         "foreground": "#BA8BAF"
@@ -98,10 +118,10 @@
                 {
                     "name": "Preproc",
                     "scope": [
+                        //
                         "entity.name.function.preprocessor",
-                        "meta.preprocessor",
-                        // C/C++
-                        "entity.other.attribute-name.pragma.preprocessor"
+                        "entity.other.attribute-name.pragma.preprocessor",
+                        "meta.preprocessor"
                     ],
                     "settings": {
                         "foreground": "#BA8BAF"
@@ -110,9 +130,12 @@
                 {
                     "name": "Type",
                     "scope": [
-                        "storage.modifier",
+                        "entity.name.type",
                         "storage.type",
-                        // C/C++
+                        "storage.modifier",
+                        //
+                        "entity.name.namespace",
+                        "entity.name.operator.type",
                         "keyword.other.typedef"
                     ],
                     "settings": {
@@ -123,7 +146,9 @@
                     "name": "Special",
                     "scope": [
                         "constant.character.escape",
-                        "constant.other.placeholder"
+                        "entity.name.tag"
+                        //
+                        // "constant.other.placeholder"
                     ],
                     "settings": {
                         "foreground": "#A16946"
@@ -135,7 +160,34 @@
     "editor.semanticTokenColorCustomizations": {
         "[Dark Modern]": {
             "enabled": true,
-            "rules": {}
+            "rules": {
+                "namespace": "#7CAFC2",
+                "type": "#7CAFC2",
+                "class": "#7CAFC2",
+                "enum": "#7CAFC2",
+                "interface": "#7CAFC2",
+                "struct": "#7CAFC2",
+                "typeParameter": "#7CAFC2",
+                "parameter": "#D8D8D8",
+                "variable": "#D8D8D8",
+                "property": "#D8D8D8",
+                "enumMember": "#DC9656",
+                "event": "#D8D8D8",
+                "function": "#D8D8D8",
+                "method": "#D8D8D8",
+                "macro": "#BA8BAF",
+                "keyword": "#BA8BAF",
+                "modifier": "#7CAFC2",
+                "comment": {
+                    "foreground": "#A1B56C",
+                    "fontStyle": "italic"
+                },
+                "string": "#DC9656",
+                "number": "#DC9656",
+                "regexp": "#DC9656",
+                "operator": "#D8D8D8",
+                "decorator": "#BA8BAF"
+            }
         }
     }
 }
