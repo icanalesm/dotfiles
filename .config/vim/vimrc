@@ -107,10 +107,10 @@ hi LspDiagInlineError ctermfg=black ctermbg=red
 hi LspDiagInlineWarning ctermfg=black ctermbg=yellow
 hi LspDiagInlineInfo cterm=underline
 hi LspDiagInlineHint ctermfg=black ctermbg=cyan
-hi LspDiagSignErrorText ctermfg=red ctermbg=18
-hi LspDiagSignWarningText ctermfg=yellow ctermbg=18
-hi LspDiagSignInfoText ctermfg=blue ctermbg=18
-hi LspDiagSignHintText ctermfg=cyan ctermbg=18
+hi LspDiagSignErrorText ctermfg=red ctermbg=00
+hi LspDiagSignWarningText ctermfg=yellow ctermbg=00
+hi LspDiagSignInfoText ctermfg=blue ctermbg=00
+hi LspDiagSignHintText ctermfg=cyan ctermbg=00
 hi link LspInlayHintsParam LineNr
 hi link LspInlayHintsType LineNr
 " Highlight customisation - Not documented

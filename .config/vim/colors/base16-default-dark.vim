@@ -142,12 +142,12 @@ call <sid>hi("ErrorMsg",      s:gui_red, s:gui_00, s:cterm_red, s:cterm_00, "", 
 call <sid>hi("VertSplit",     s:gui_02, s:gui_02, s:cterm_02, s:cterm_02, "none", "")
 "call <sid>hi("Folded",        s:gui_03, s:gui_01, s:cterm_03, s:cterm_01, "", "")
 "call <sid>hi("FoldColumn",    s:gui_cyan, s:gui_01, s:cterm_cyan, s:cterm_01, "", "")
-call <sid>hi("SignColumn",    s:gui_03, s:gui_01, s:cterm_03, s:cterm_01, "", "")
+call <sid>hi("SignColumn",    s:gui_03, s:gui_00, s:cterm_03, s:cterm_00, "", "")
 hi! link IncSearch CurSearch
-call <sid>hi("LineNr",        s:gui_03, s:gui_01, s:cterm_03, s:cterm_01, "", "")
+call <sid>hi("LineNr",        s:gui_03, s:gui_00, s:cterm_03, s:cterm_00, "", "")
 hi! link LineNrAbove LineNr
 hi! link LineNrBelow LineNr
-call <sid>hi("CursorLineNr",  s:gui_04, s:gui_01, s:cterm_04, s:cterm_01, "bold", "")
+call <sid>hi("CursorLineNr",  s:gui_04, s:gui_00, s:cterm_04, s:cterm_00, "bold", "")
 "hi! link CursorLineFold FoldColumn
 "hi! link CursorLineSign SignColumn
 call <sid>hi("MatchParen",    "", s:gui_03, "", s:cterm_03,  "", "")
