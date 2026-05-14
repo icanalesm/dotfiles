@@ -83,7 +83,6 @@
                         "entity.name.section",
                         "variable.parameter",
                         //
-                        "keyword.other.operator.overload",
                         "variable.other.enummember"
                     ],
                     "settings": {
@@ -95,7 +94,8 @@
                     "scope": [
                         "keyword.operator",
                         //
-                        "keyword.operator.sizeof"
+                        "keyword.operator.sizeof",
+                        "keyword.other.operator.overload"
                     ],
                     "settings": {
                         "foreground": "#D8D8D8"
