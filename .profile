@@ -1,25 +1,27 @@
 #!/bin/sh
 
-## PATH
-export PATH="$HOME/.local/share/cargo/bin:$HOME/.local/bin:$PATH"
-
-## Default programs
-export PAGER="less"
-export EDITOR="vim"
-
-## Configuration
+## XDG Base Directory
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
+
+## Configuration
 export XINITRC="$XDG_CONFIG_HOME/X11/xinit/xinitrc"
 export XSERVERRC="$XDG_CONFIG_HOME/X11/xinit/xserverrc"
 export HISTFILE="$XDG_STATE_HOME/history"
-export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 export DOT_SAGE="$XDG_CONFIG_HOME/sage"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
+
+## PATH
+export PATH="$HOME/.local/bin:$CARGO_HOME/bin:$PATH"
+
+## Default programs
+export PAGER="less"
+export EDITOR="vim"
 
 ## Configuration for different shells
 case $0 in
@@ -28,7 +30,7 @@ case $0 in
 	# the name bash
 	case $- in
 	*i*)
-		script="$HOME/.config/bash/bashrc"
+		script="$XDG_CONFIG_HOME/bash/bashrc"
 		[ -f "$script" ] && [ -r "$script" ] && . "$script"
 		unset script
 		;;
