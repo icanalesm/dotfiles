@@ -1,16 +1,16 @@
 #!/bin/sh
 
-script="$HOME/.config/shell/aliases"
+script="$XDG_CONFIG_HOME/shell/aliases"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
 
-script="$HOME/.config/shell/colours"
+script="$XDG_CONFIG_HOME/shell/colours"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
 
 case $0 in
 *bash*)
-	script="$HOME/.config/bash/prompt" ;;
+	script="$XDG_CONFIG_HOME/bash/prompt" ;;
 *)
-	script="$HOME/.config/shell/prompt" ;;
+	script="$XDG_CONFIG_HOME/shell/prompt" ;;
 esac
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
 

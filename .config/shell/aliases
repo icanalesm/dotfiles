@@ -1,5 +1,7 @@
 #!/bin/sh
 
-alias dotf='git --git-dir=$HOME/.config/dotfiles/ --work-tree=$HOME'
+alias dotf='git --git-dir=$XDG_CONFIG_HOME/dotfiles/ --work-tree=$HOME'
 alias ls='ls --color=auto'
 alias startx-v='startx -- -verbose 6 -logverbose 6 1> /tmp/Xout.log 2> /tmp/Xerr.log'
+alias pyclean="find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete"
+alias conda_activate_in_session='eval "$($XDG_DATA_HOME/miniconda3/bin/conda shell.bash hook)"'
