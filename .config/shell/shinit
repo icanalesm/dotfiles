@@ -1,10 +1,29 @@
 #!/bin/sh
 
-script="$XDG_CONFIG_HOME/shell/aliases"
+# ==============================================================================
+# Aliases
+# ==============================================================================
+
+alias dotf='git --git-dir=$XDG_CONFIG_HOME/dotfiles/ --work-tree=$HOME'
+alias ls='ls --color=auto'
+alias startx-v='startx -- -verbose 6 -logverbose 6 1> /tmp/Xout.log 2> /tmp/Xerr.log'
+alias pyclean="find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete"
+alias conda_activate_in_session='eval "$($XDG_DATA_HOME/miniconda3/bin/conda shell.bash hook)"'
+
+# ==============================================================================
+# Colours
+# ==============================================================================
+
+# Colours for shell - tinted-shell (https://github.com/tinted-theming/tinted-shell)
+script="$XDG_CONFIG_HOME/shell/tinted-shell/scripts/base16-default-dark.sh"
 [ -f "$script" ] && [ -r "$script" ] && . "$script"
 
-script="$XDG_CONFIG_HOME/shell/colours"
-[ -f "$script" ] && [ -r "$script" ] && . "$script"
+# Colours for ls
+export LS_COLORS="di=34:ln=35:so=31:pi=33:ex=32:bd=30;46:cd=0;45:su=33;42:sg=33;42:tw=31;44:ow=0;44"
+
+# ==============================================================================
+# Prompt
+# ==============================================================================
 
 case $0 in
 *bash*)
