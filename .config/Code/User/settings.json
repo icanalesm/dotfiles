@@ -1,21 +1,63 @@
 {
-    "python.defaultInterpreterPath": "/home/isaac/.local/share/miniconda3",
-    "editor.minimap.enabled": false,
     "workbench.colorTheme": "Dark Modern",
     "workbench.colorCustomizations": {
         "[Dark Modern]": {
+            // Modern UI colors
+            "surface.border": "#383838",
+            "surface.background": "#181818",
+            "surface.foreground": "#D8D8D8",
+            "modernTab.activeBackground": "#181818",
+            "modernTab.activeForeground": "#D8D8D8",
+            "modernActivityBar.border": "#383838",
+            // Lists and trees
+            "list.activeSelectionBackground": "#282828",
+            "list.inactiveSelectionBackground": "#282828",
+            "list.hoverBackground": "#282828",
+            // Activity Bar
+            "activityBar.background": "#181818",
+            "activityBar.foreground": "#D8D8D8",
+            // Side Bar
+            "sideBar.background": "#181818",
+            "sideBar.foreground": "#D8D8D8",
+            // Editor colors
             "editor.background": "#181818",
             "editor.foreground": "#D8D8D8",
             "editorLineNumber.foreground": "#585858",
             "editorLineNumber.activeForeground": "#B8B8B8",
+            "editorCursor.foreground": "#D8D8D8",
             "editor.lineHighlightBackground": "#282828",
-            "list.activeSelectionBackground": "#282828",
-            "list.inactiveSelectionBackground": "#282828",
-            "keybindingLabel.foreground": "#D8D8D8",
+            // Status Bar colors
+            "statusBar.background": "#181818",
+            "statusBar.foreground": "#D8D8D8",
+            "statusBarItem.hoverBackground": "#383838",
+            "statusBarItem.hoverForeground": "#D8D8D8",
+            "statusBarItem.activeBackground": "#383838",
+            // Title Bar colors
+            "titleBar.activeBackground": "#181818",
+            "titleBar.activeForeground": "#D8D8D8",
+            // Menu Bar colors
+            "menubar.selectionBackground": "#282828",
+            "menubar.selectionForeground": "#D8D8D8",
+            "menu.background": "#181818",
+            "menu.foreground": "#D8D8D8",
+            "menu.border": "#383838",
+            "menu.separatorBackground": "#383838",
+            "menu.selectionBackground": "#282828",
+            "menu.selectionForeground": "#D8D8D8",
+            // Quick picker colors
             "quickInput.background": "#181818",
-            "quickInput.foreground": "#D8D8D8"
+            "quickInput.foreground": "#D8D8D8",
+            "quickInputList.focusBackground": "#282828",
+            "quickInputList.focusForeground": "#D8D8D8",
+            "quickInputList.focusIconForeground": "#D8D8D8",
+            // Keybinding label colors
+            "keybindingLabel.background": "#383838",
+            "keybindingLabel.foreground": "#D8D8D8",
+            "keybindingLabel.border": "#383838",
+            "keybindingLabel.bottomBorder": "#585858"
         }
     },
+    "editor.minimap.enabled": false,
     "editor.bracketPairColorization.enabled": false,
     "editor.tokenColorCustomizations": {
         "[Dark Modern]": {
@@ -189,5 +231,12 @@
                 "decorator": "#BA8BAF"
             }
         }
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "chat.titleBar.signIn.enabled": false,
+    "chat.titleBar.openInAgentsWindow.enabled": false,
+    "python.defaultInterpreterPath": "/home/isaac/.local/share/miniconda3",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
     }
 }
