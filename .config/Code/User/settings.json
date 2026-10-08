@@ -61,7 +61,10 @@
     "editor.bracketPairColorization.enabled": false,
     "editor.tokenColorCustomizations": {
         "[Dark Modern]": {
-            "comments": "#A1B56C",
+            "comments": {
+                "foreground": "#A1B56C",
+                "fontStyle": "italic"
+            },
             "strings": "#DC9656",
             "numbers": "#DC9656",
             "variables": "#D8D8D8",
@@ -72,8 +75,7 @@
                 {
                     "name": "Normal",
                     "scope": [
-                        //
-                        "entity.other.attribute.nodiscard"
+                        "entity.other.attribute"
                     ],
                     "settings": {
                         "foreground": "#D8D8D8"
@@ -82,14 +84,13 @@
                 {
                     "name": "Comment",
                     "scope": [
-                        "comment.line",
-                        "comment.line.double-slash",
-                        "comment.line.double-dash",
-                        "comment.line.number-sign",
-                        "comment.line.percentage",
-                        "comment.block",
-                        "comment.block.documentation"
-                        //
+                        // "comment.line",
+                        // "comment.line.double-slash",
+                        // "comment.line.double-dash",
+                        // "comment.line.number-sign",
+                        // "comment.line.percentage",
+                        // "comment.block",
+                        // "comment.block.documentation",
                         // "storage.type.class.doxygen"
                     ],
                     "settings": {
@@ -100,19 +101,19 @@
                 {
                     "name": "Constant",
                     "scope": [
-                        "constant.numeric",
+                        // "constant.numeric",
                         "constant.character",
                         "constant.language",
-                        "constant.other",
-                        "string.quoted.single",
-                        "string.quoted.double",
-                        "string.quoted.triple",
-                        "string.quoted.other",
-                        "string.unquoted",
-                        "string.interpolated",
-                        "string.regexp",
-                        //
-                        "keyword.other.unit"
+                        // "constant.other",
+                        // "string.quoted.single",
+                        // "string.quoted.double",
+                        // "string.quoted.triple",
+                        // "string.quoted.other",
+                        // "string.unquoted",
+                        // "string.interpolated",
+                        // "string.regexp",
+                        "keyword.other.unit",
+                        "variable.other.enummember"
                     ],
                     "settings": {
                         "foreground": "#DC9656"
@@ -121,11 +122,10 @@
                 {
                     "name": "Identifier",
                     "scope": [
-                        "entity.name.function",
-                        "entity.name.section",
-                        "variable.parameter",
-                        //
-                        "variable.other.enummember"
+                        // "entity.name.function",
+                        // "entity.name.section",
+                        "entity.name.operator",
+                        // "variable.parameter"
                     ],
                     "settings": {
                         "foreground": "#D8D8D8"
@@ -135,9 +135,7 @@
                     "name": "Operator",
                     "scope": [
                         "keyword.operator",
-                        //
-                        "keyword.operator.sizeof",
-                        "keyword.other.operator.overload"
+                        "keyword.operator.sizeof"
                     ],
                     "settings": {
                         "foreground": "#D8D8D8"
@@ -146,12 +144,12 @@
                 {
                     "name": "Keyword",
                     "scope": [
-                        "keyword.control",
-                        "keyword.other",
-                        "variable.language",
-                        //
+                        "keyword",
+                        // "keyword.control",
                         "keyword.operator.cast",
-                        "keyword.other.using"
+                        "keyword.other.operator",
+                        "keyword.other.using",
+                        "variable.language.this"
                     ],
                     "settings": {
                         "foreground": "#BA8BAF"
@@ -160,10 +158,11 @@
                 {
                     "name": "Preproc",
                     "scope": [
-                        //
+                        "constant.language.NULL",
                         "entity.name.function.preprocessor",
                         "entity.other.attribute-name.pragma.preprocessor",
-                        "meta.preprocessor"
+                        "meta.preprocessor",
+                        "variable.parameter.preprocessor"
                     ],
                     "settings": {
                         "foreground": "#BA8BAF"
@@ -172,12 +171,13 @@
                 {
                     "name": "Type",
                     "scope": [
-                        "entity.name.type",
                         "storage.type",
                         "storage.modifier",
-                        //
-                        "entity.name.namespace",
-                        "entity.name.operator.type",
+                        // "entity.name.type",
+                        // "entity.name.namespace",
+                        // "entity.name.operator.type",
+                        "entity.name.scope-resolution",
+                        "keyword.operator.noexcept",
                         "keyword.other.typedef"
                     ],
                     "settings": {
@@ -188,20 +188,19 @@
                     "name": "Special",
                     "scope": [
                         "constant.character.escape",
-                        "entity.name.tag"
-                        //
+                        // "entity.name.tag",
                         // "constant.other.placeholder"
                     ],
                     "settings": {
                         "foreground": "#A16946"
                     }
-                },
+                }
             ]
         }
     },
     "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
         "[Dark Modern]": {
-            "enabled": true,
             "rules": {
                 "namespace": "#7CAFC2",
                 "type": "#7CAFC2",
