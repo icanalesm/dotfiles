@@ -58,6 +58,7 @@
         }
     },
     "editor.minimap.enabled": false,
+    "editor.inlayHints.enabled": "offUnlessPressed",
     "editor.bracketPairColorization.enabled": false,
     "editor.tokenColorCustomizations": {
         "[Dark Modern]": {
@@ -232,10 +233,5 @@
         }
     },
     "diffEditor.ignoreTrimWhitespace": false,
-    "chat.titleBar.signIn.enabled": false,
-    "chat.titleBar.openInAgentsWindow.enabled": false,
-    "python.defaultInterpreterPath": "/home/isaac/.local/share/miniconda3",
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
-    }
+    "chat.disableAIFeatures": true
 }
