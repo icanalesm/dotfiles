@@ -14,6 +14,9 @@ export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export PYTHON_HISTORY="$XDG_STATE_HOME/python_history"
 export DOT_SAGE="$XDG_CONFIG_HOME/sage"
+export TEXMFHOME="$XDG_DATA_HOME/texmf"
+export TEXMFCONFIG="$XDG_CONFIG_HOME/texlive/texmf-config"
+export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 
 ## PATH
